@@ -7,258 +7,329 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --navy-deepest:#040d1a;--navy-deep:#071428;--navy-mid:#0a1f3d;
-  --navy-light:#0f2d56;--navy-border:#1a3a6b;
-  --accent-gold:#c9a84c;--accent-blue:#3a8fe8;
-  --accent-teal:#1fc4b0;--accent-red:#e84040;--accent-green:#1fd67a;
-  --white:#f0f4ff;--white-dim:#a8b8d8;--white-faint:#4a5a7a;
-  --glass:rgba(15,45,86,0.55);--glass-border:rgba(58,143,232,0.18);
+  --bg:#040d1a;--navy:#071428;--mid:#0a1f3d;--light:#0f2d56;
+  --border:#1a3a6b;--gold:#c9a84c;--blue:#3a8fe8;
+  --teal:#1fc4b0;--red:#e84040;--green:#1fd67a;
+  --white:#f0f4ff;--dim:#a8b8d8;--faint:#4a5a7a;
+  --glass:rgba(15,45,86,0.55);--gb:rgba(58,143,232,0.18);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--navy-deepest);color:var(--white);min-height:100vh;overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden;}
 .bg-grid{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(58,143,232,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(58,143,232,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
-.bg-glow{position:fixed;top:-200px;left:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(58,143,232,0.1) 0%,transparent 70%);pointer-events:none;z-index:0;animation:glow 12s ease-in-out infinite alternate;}
+.bg-glow{position:fixed;top:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(58,143,232,0.1) 0%,transparent 70%);pointer-events:none;z-index:0;animation:glow 12s ease-in-out infinite alternate;}
 @keyframes glow{from{transform:translate(0,0);}to{transform:translate(40px,30px);}}
 
-/* NAV */
-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid var(--glass-border);background:rgba(4,13,26,0.92);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:12px;}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--white);cursor:pointer;}
-.logo-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.logo span{color:var(--accent-teal);}
-.nav-links{display:flex;gap:4px;list-style:none;}
-.nav-links li a{color:var(--white-dim);text-decoration:none;font-size:0.85rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:all 0.2s;cursor:pointer;display:block;}
-.nav-links li a:hover{color:var(--white);background:rgba(255,255,255,0.06);}
-.nav-links li a.active{color:var(--accent-teal);background:rgba(31,196,176,0.1);}
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 36px;border-bottom:1px solid var(--gb);background:rgba(4,13,26,0.95);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--white);cursor:pointer;}
+.logo-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:0.95rem;}
+.logo span{color:var(--teal);}
+.nav-links{display:flex;gap:2px;list-style:none;}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:0.83rem;font-weight:500;padding:7px 13px;border-radius:8px;transition:all 0.2s;cursor:pointer;display:block;}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:var(--teal);background:rgba(31,196,176,0.1);}
+.nav-links a.locked{opacity:0.4;cursor:not-allowed;}
+.nav-links a.locked:hover{background:transparent;color:var(--dim);}
 .nav-right{display:flex;align-items:center;gap:10px;}
-.nav-user{font-size:0.82rem;color:var(--white-dim);}
-.nav-user span{color:var(--accent-teal);font-weight:600;}
-.btn-nav{background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));color:#fff;border:none;padding:9px 18px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;}
-.btn-nav:hover{opacity:0.85;}
-.btn-nav-out{background:transparent;color:var(--accent-red);border:1px solid var(--accent-red);padding:8px 16px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
-.btn-nav-out:hover{background:var(--accent-red);color:#fff;}
+.nav-user-info{display:none;align-items:center;gap:10px;}
+.nav-avatar{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;}
+.nav-uname{font-size:0.82rem;color:var(--dim);}
+.nav-uname span{color:var(--teal);font-weight:600;}
+.btn-n{padding:8px 18px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.83rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:none;}
+.btn-n-primary{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;}
+.btn-n-primary:hover{opacity:0.85;}
+.btn-n-outline{background:transparent;border:1px solid var(--red);color:var(--red);}
+.btn-n-outline:hover{background:var(--red);color:#fff;}
+.btn-n-ghost{background:transparent;border:1px solid var(--border);color:var(--dim);}
+.btn-n-ghost:hover{border-color:var(--blue);color:var(--white);}
 
-/* PAGES */
-.page{display:none;position:relative;z-index:1;min-height:calc(100vh - 65px);}
+/* ── PAGES ── */
+.page{display:none;position:relative;z-index:1;min-height:calc(100vh - 60px);}
 .page.active{display:block;}
+.wrap{max-width:1100px;margin:0 auto;padding:56px 36px;}
+.wrap-sm{max-width:680px;margin:0 auto;padding:56px 36px;}
+.wrap-md{max-width:860px;margin:0 auto;padding:56px 36px;}
 
-/* COMMON */
-.container{max-width:1100px;margin:0 auto;padding:60px 40px;}
-.page-hero{padding:60px 40px 40px;max-width:1100px;margin:0 auto;}
-.section-tag{display:inline-block;font-size:0.72rem;font-weight:600;color:var(--accent-blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;margin-bottom:10px;line-height:1.2;}
-.section-title em{font-style:normal;color:var(--accent-teal);}
-.section-sub{color:var(--white-dim);font-size:0.9rem;line-height:1.7;max-width:560px;margin-bottom:32px;}
-.card{background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;padding:28px;backdrop-filter:blur(12px);}
-.form-label{display:block;font-size:0.8rem;font-weight:600;color:var(--white-dim);margin-bottom:7px;}
-.form-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--navy-border);color:var(--white);padding:11px 15px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;outline:none;margin-bottom:16px;}
-.form-input:focus{border-color:var(--accent-blue);}
-.form-select{width:100%;background:#0d2040;border:1px solid var(--navy-border);color:var(--white);padding:11px 15px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;cursor:pointer;margin-bottom:16px;}
-.form-select option{background:#0d2040;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
-.form-section{font-size:0.75rem;font-weight:700;color:var(--accent-blue);letter-spacing:0.1em;text-transform:uppercase;margin:20px 0 16px;}
-.divider{height:1px;background:var(--glass-border);margin:24px 0;}
-.btn-primary{background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));color:#fff;border:none;padding:13px 28px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(58,143,232,0.3);}
-.btn-primary:hover{transform:translateY(-2px);}
-.btn-secondary{background:transparent;color:var(--white);border:1px solid var(--navy-border);padding:13px 28px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
-.btn-secondary:hover{border-color:var(--accent-blue);}
-.btn-full{width:100%;padding:14px;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.btn-full-primary{background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));color:#fff;border:none;}
-.btn-full-primary:hover{opacity:0.9;}
-.btn-full-danger{background:transparent;color:var(--accent-red);border:1px solid var(--accent-red);}
-.btn-full-danger:hover{background:var(--accent-red);color:#fff;}
+/* ── TYPOGRAPHY ── */
+.tag{display:inline-block;font-size:0.7rem;font-weight:700;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.15;margin-bottom:18px;}
+.h1 em,.h2 em{font-style:normal;color:var(--teal);}
+.h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:10px;}
+.sub{color:var(--dim);font-size:0.9rem;line-height:1.7;margin-bottom:28px;}
 
-/* HOME */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 40px 60px;max-width:1100px;margin:0 auto;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.3);padding:6px 16px;border-radius:100px;font-size:0.72rem;font-weight:600;color:var(--accent-teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;}
-.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-teal);animation:pulse 2s ease-in-out infinite;}
+/* ── CARDS ── */
+.card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:28px;backdrop-filter:blur(12px);}
+.card-sm{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:20px;backdrop-filter:blur(10px);}
+
+/* ── FORMS ── */
+.flabel{display:block;font-size:0.78rem;font-weight:600;color:var(--dim);margin-bottom:6px;}
+.finput{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:11px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:border-color 0.2s;outline:none;}
+.finput:focus{border-color:var(--blue);}
+.fselect{width:100%;background:#0d2040;border:1px solid var(--border);color:var(--white);padding:11px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;cursor:pointer;}
+.fselect option{background:#0d2040;}
+.ftextarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:11px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;resize:vertical;line-height:1.6;}
+.ftextarea:focus{border-color:var(--blue);}
+.fg{margin-bottom:16px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.fsec{font-size:0.72rem;font-weight:700;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin:20px 0 14px;}
+.fdiv{height:1px;background:var(--gb);margin:22px 0;}
+
+/* ── BUTTONS ── */
+.btn{padding:12px 24px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:none;}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;box-shadow:0 4px 20px rgba(58,143,232,0.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,143,232,0.4);}
+.btn-secondary{background:transparent;color:var(--white);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--blue);}
+.btn-full{width:100%;padding:13px;}
+.btn-danger{background:transparent;color:var(--red);border:1px solid var(--red);}
+.btn-danger:hover{background:var(--red);color:#fff;}
+
+/* ── HOME ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 36px 60px;max-width:1100px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.3);padding:5px 14px;border-radius:100px;font-size:0.7rem;font-weight:700;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.4);}}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.15;margin-bottom:18px;}
-.hero h1 em{font-style:normal;color:var(--accent-teal);}
-.hero p{font-size:0.95rem;color:var(--white-dim);line-height:1.75;margin-bottom:28px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.stats-row{display:flex;gap:32px;margin-top:36px;padding-top:28px;border-top:1px solid var(--glass-border);}
-.stat-num{font-family:'DM Mono',monospace;font-size:1.5rem;font-weight:500;}
-.stat-num span{color:var(--accent-teal);}
-.stat-label{font-size:0.72rem;color:var(--white-faint);margin-top:3px;}
-.dash-preview{background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;padding:24px;backdrop-filter:blur(12px);animation:float 6s ease-in-out infinite;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;}
+.stats-row{display:flex;gap:32px;padding-top:28px;border-top:1px solid var(--gb);}
+.snum{font-family:'DM Mono',monospace;font-size:1.5rem;font-weight:500;}
+.snum span{color:var(--teal);}
+.slbl{font-size:0.7rem;color:var(--faint);margin-top:3px;}
+.preview-card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:22px;backdrop-filter:blur(12px);animation:float 6s ease-in-out infinite;}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.mini-chart{height:70px;display:flex;align-items:flex-end;gap:4px;margin:16px 0;}
-.bar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--accent-blue),var(--accent-teal));opacity:0.7;}
-.bar.loss{background:linear-gradient(to top,#e84040,#ff6b6b);}
-.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.metric-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;}
-.metric-lbl{font-size:0.68rem;color:var(--white-faint);margin-bottom:4px;}
-.metric-val{font-family:'DM Mono',monospace;font-size:0.95rem;font-weight:500;}
-.metric-val.up{color:var(--accent-green);}
-.metric-val.down{color:var(--accent-red);}
-.metric-val.blue{color:var(--accent-blue);}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
-.feature-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:26px;cursor:pointer;transition:transform 0.3s,border-color 0.3s;}
-.feature-card:hover{transform:translateY(-5px);border-color:var(--accent-blue);}
-.feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
-.icon-blue{background:rgba(58,143,232,0.15);}
-.icon-teal{background:rgba(31,196,176,0.15);}
-.icon-gold{background:rgba(201,168,76,0.15);}
-.icon-green{background:rgba(31,214,122,0.15);}
-.icon-red{background:rgba(232,64,64,0.15);}
-.icon-purple{background:rgba(138,99,232,0.15);}
-.feature-title{font-size:0.95rem;font-weight:600;margin-bottom:7px;}
-.feature-desc{font-size:0.82rem;color:var(--white-dim);line-height:1.6;}
+.mini-chart{height:65px;display:flex;align-items:flex-end;gap:4px;margin:14px 0;}
+.bar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--blue),var(--teal));opacity:0.7;}
+.bar.loss{background:linear-gradient(to top,var(--red),#ff6b6b);}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.mb{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:10px;}
+.ml{font-size:0.65rem;color:var(--faint);margin-bottom:4px;}
+.mv{font-family:'DM Mono',monospace;font-size:0.88rem;font-weight:500;}
+.mv.up{color:var(--green);}
+.mv.dn{color:var(--red);}
+.mv.bl{color:var(--blue);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
+.fc{background:var(--glass);border:1px solid var(--gb);border-radius:15px;padding:24px;cursor:pointer;transition:transform 0.3s,border-color 0.3s;}
+.fc:hover{transform:translateY(-4px);border-color:var(--blue);}
+.fi{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:14px;}
+.fi-b{background:rgba(58,143,232,0.15);}
+.fi-t{background:rgba(31,196,176,0.15);}
+.fi-g{background:rgba(201,168,76,0.15);}
+.fi-r{background:rgba(232,64,64,0.15);}
+.fi-gr{background:rgba(31,214,122,0.15);}
+.fi-p{background:rgba(138,99,232,0.15);}
+.ft{font-size:0.92rem;font-weight:600;margin-bottom:6px;}
+.fd{font-size:0.8rem;color:var(--dim);line-height:1.6;}
 
-/* REGISTER */
-.privacy-box{display:flex;gap:12px;background:rgba(31,196,176,0.06);border:1px solid rgba(31,196,176,0.2);border-radius:12px;padding:16px;margin-top:18px;}
-.privacy-box p{font-size:0.8rem;color:var(--white-dim);line-height:1.6;}
-.privacy-box strong{color:var(--accent-teal);}
+/* ── AUTH PAGES ── */
+.auth-page{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 60px);padding:40px 20px;}
+.auth-box{width:100%;max-width:480px;}
+.auth-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:36px;backdrop-filter:blur(12px);}
+.auth-logo{text-align:center;margin-bottom:28px;}
+.auth-logo .logo{justify-content:center;font-size:1.5rem;}
+.auth-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;text-align:center;margin-bottom:6px;}
+.auth-sub{font-size:0.83rem;color:var(--dim);text-align:center;margin-bottom:28px;}
+.auth-switch{text-align:center;margin-top:20px;font-size:0.82rem;color:var(--dim);}
+.auth-switch a{color:var(--teal);cursor:pointer;font-weight:600;}
+.auth-switch a:hover{text-decoration:underline;}
+.privacy-note{display:flex;gap:10px;background:rgba(31,196,176,0.06);border:1px solid rgba(31,196,176,0.2);border-radius:10px;padding:14px;margin-top:16px;}
+.privacy-note p{font-size:0.77rem;color:var(--dim);line-height:1.6;}
+.privacy-note strong{color:var(--teal);}
 
-/* JOURNAL */
-.tabs{display:flex;gap:6px;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:12px;padding:5px;}
-.tab{padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.2s;color:var(--white-dim);border:none;background:transparent;font-family:'DM Sans',sans-serif;}
-.tab.active{background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));color:#fff;}
-.tab:hover:not(.active){background:rgba(255,255,255,0.06);color:var(--white);}
-.upload-zone{border:2px dashed var(--navy-border);border-radius:14px;padding:36px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:22px;position:relative;}
-.upload-zone:hover{border-color:var(--accent-blue);background:rgba(58,143,232,0.04);}
-.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-icon{font-size:2.2rem;margin-bottom:10px;}
-.upload-text{font-size:0.88rem;color:var(--white-dim);}
-.upload-text span{color:var(--accent-blue);font-weight:600;}
-.upload-preview{width:100%;border-radius:10px;margin-top:12px;max-height:180px;object-fit:contain;display:none;}
-.emotion-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
-.emotion-btn{padding:10px 6px;border-radius:10px;border:1px solid var(--navy-border);background:transparent;color:var(--white-dim);font-family:'DM Sans',sans-serif;font-size:0.78rem;cursor:pointer;text-align:center;transition:all 0.2s;}
-.emotion-btn.selected{border-color:var(--accent-teal);background:rgba(31,196,176,0.12);color:var(--accent-teal);}
-.emotion-emoji{display:block;font-size:1.3rem;margin-bottom:3px;}
-.result-btns{display:flex;gap:12px;margin-bottom:18px;}
-.result-btn{flex:1;padding:12px;border-radius:10px;border:1px solid var(--navy-border);background:transparent;color:var(--white-dim);font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.result-btn.win.sel{border-color:var(--accent-green);background:rgba(31,214,122,0.12);color:var(--accent-green);}
-.result-btn.loss.sel{border-color:var(--accent-red);background:rgba(232,64,64,0.12);color:var(--accent-red);}
-.entry-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:22px;margin-bottom:14px;transition:border-color 0.2s;}
+/* ── LOCKED OVERLAY ── */
+.locked-overlay{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 60px);text-align:center;padding:40px;}
+.lo-icon{font-size:3.5rem;margin-bottom:20px;}
+.lo-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:10px;}
+.lo-sub{font-size:0.9rem;color:var(--dim);margin-bottom:28px;max-width:400px;}
+.lo-btns{display:flex;gap:12px;justify-content:center;}
+
+/* ── JOURNAL ── */
+.jtabs{display:flex;gap:5px;background:rgba(255,255,255,0.04);border:1px solid var(--gb);border-radius:11px;padding:5px;}
+.jtab{padding:8px 16px;border-radius:7px;font-size:0.83rem;font-weight:500;cursor:pointer;transition:all 0.2s;color:var(--dim);border:none;background:transparent;font-family:'DM Sans',sans-serif;}
+.jtab.active{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;}
+.upload-zone{border:2px dashed var(--border);border-radius:13px;padding:32px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:20px;position:relative;overflow:hidden;}
+.upload-zone:hover{border-color:var(--blue);background:rgba(58,143,232,0.04);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-prev{width:100%;border-radius:9px;margin-top:10px;max-height:160px;object-fit:contain;display:none;}
+.emo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.emo-btn{padding:9px 6px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.75rem;cursor:pointer;text-align:center;transition:all 0.2s;}
+.emo-btn.sel{border-color:var(--teal);background:rgba(31,196,176,0.12);color:var(--teal);}
+.emo-e{display:block;font-size:1.25rem;margin-bottom:3px;}
+.res-btns{display:flex;gap:10px;margin-bottom:16px;}
+.res-btn{flex:1;padding:11px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.res-btn.win.sel{border-color:var(--green);background:rgba(31,214,122,0.12);color:var(--green);}
+.res-btn.loss.sel{border-color:var(--red);background:rgba(232,64,64,0.12);color:var(--red);}
+
+/* AI Analysis Box */
+.ai-box{background:rgba(31,196,176,0.06);border:1px solid rgba(31,196,176,0.25);border-radius:14px;padding:20px;margin-top:20px;}
+.ai-box-title{font-size:0.8rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.ai-box-content{font-size:0.85rem;color:var(--dim);line-height:1.75;}
+.ai-box-content strong{color:var(--white);}
+.ai-typing{display:inline-block;width:6px;height:14px;background:var(--teal);border-radius:2px;animation:blink 1s step-end infinite;margin-left:4px;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* Entry cards */
+.entry-card{background:var(--glass);border:1px solid var(--gb);border-radius:15px;padding:20px;margin-bottom:12px;transition:border-color 0.2s;}
 .entry-card:hover{border-color:rgba(58,143,232,0.4);}
 .entry-card.repeat{border-color:rgba(232,64,64,0.4);background:rgba(232,64,64,0.03);}
-.entry-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
-.entry-asset{font-size:0.98rem;font-weight:600;}
-.entry-meta{font-size:0.72rem;color:var(--white-faint);margin-top:2px;}
-.entry-badges{display:flex;align-items:center;gap:8px;}
-.badge{padding:3px 10px;border-radius:100px;font-size:0.72rem;font-weight:600;}
-.badge-win{background:rgba(31,214,122,0.12);color:var(--accent-green);border:1px solid rgba(31,214,122,0.3);}
-.badge-loss{background:rgba(232,64,64,0.12);color:var(--accent-red);border:1px solid rgba(232,64,64,0.3);}
-.entry-info{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px;}
-.entry-info span{font-size:0.8rem;color:var(--white-dim);}
-.entry-info strong{color:var(--white);}
-.entry-note{font-size:0.83rem;color:var(--white-dim);line-height:1.6;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:10px;}
-.repeat-warning{display:flex;gap:10px;align-items:flex-start;background:rgba(232,64,64,0.08);border:1px solid rgba(232,64,64,0.25);border-radius:10px;padding:12px;}
-.repeat-warning-text{font-size:0.8rem;color:var(--white-dim);line-height:1.5;}
-.repeat-warning-text strong{color:var(--accent-red);}
-.del-btn{background:transparent;border:1px solid var(--navy-border);color:var(--white-faint);padding:4px 10px;border-radius:6px;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
-.del-btn:hover{border-color:var(--accent-red);color:var(--accent-red);}
-.empty{text-align:center;padding:60px 20px;}
+.et{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
+.ea{font-size:0.95rem;font-weight:600;}
+.em{font-size:0.7rem;color:var(--faint);margin-top:2px;}
+.ebadge{display:flex;align-items:center;gap:7px;}
+.badge{padding:3px 10px;border-radius:100px;font-size:0.7rem;font-weight:600;}
+.bw{background:rgba(31,214,122,0.12);color:var(--green);border:1px solid rgba(31,214,122,0.3);}
+.bl2{background:rgba(232,64,64,0.12);color:var(--red);border:1px solid rgba(232,64,64,0.3);}
+.ei{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.ei span{font-size:0.78rem;color:var(--dim);}
+.ei strong{color:var(--white);}
+.enote{font-size:0.82rem;color:var(--dim);line-height:1.6;padding:10px 13px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:10px;}
+.eai{background:rgba(31,196,176,0.05);border:1px solid rgba(31,196,176,0.2);border-radius:9px;padding:12px;margin-bottom:10px;}
+.eai-title{font-size:0.68rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;}
+.eai-text{font-size:0.8rem;color:var(--dim);line-height:1.65;}
+.rw{display:flex;gap:10px;align-items:flex-start;background:rgba(232,64,64,0.08);border:1px solid rgba(232,64,64,0.25);border-radius:9px;padding:12px;}
+.rw-text{font-size:0.8rem;color:var(--dim);line-height:1.5;}
+.rw-text strong{color:var(--red);}
+.del-btn{background:transparent;border:1px solid var(--border);color:var(--faint);padding:4px 10px;border-radius:6px;font-size:0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.del-btn:hover{border-color:var(--red);color:var(--red);}
+.empty{text-align:center;padding:56px 20px;}
 .empty-icon{font-size:2.8rem;margin-bottom:14px;}
 .empty-title{font-size:1rem;font-weight:600;margin-bottom:6px;}
-.empty-desc{font-size:0.83rem;color:var(--white-dim);}
+.empty-desc{font-size:0.82rem;color:var(--dim);}
 
-/* MISTAKE MEMORY */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px;}
-.stat-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:20px;text-align:center;}
-.stat-big{font-family:'DM Mono',monospace;font-size:1.8rem;font-weight:500;margin-bottom:4px;}
-.stat-big.red{color:var(--accent-red);}
-.stat-big.green{color:var(--accent-green);}
-.stat-big.blue{color:var(--accent-blue);}
-.stat-big.gold{color:var(--accent-gold);}
-.stat-lbl{font-size:0.75rem;color:var(--white-dim);}
-.pattern-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:26px;margin-bottom:18px;}
-.pattern-card.danger{border-color:rgba(232,64,64,0.35);}
-.pattern-card.warning{border-color:rgba(201,168,76,0.35);}
-.pattern-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
-.pattern-icon-box{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
-.pattern-icon-box.danger{background:rgba(232,64,64,0.15);}
-.pattern-icon-box.warning{background:rgba(201,168,76,0.15);}
-.pattern-name{font-size:0.95rem;font-weight:600;}
-.pattern-count{font-size:0.78rem;color:var(--white-dim);margin-top:2px;}
-.prog-wrap{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.prog-bg{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
-.prog-fill{height:100%;border-radius:3px;}
-.prog-fill.red{background:var(--accent-red);}
-.prog-fill.gold{background:var(--accent-gold);}
-.prog-pct{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--white-dim);}
-.pattern-advice{font-size:0.83rem;color:var(--white-dim);line-height:1.65;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:14px;}
-.timeline-title{font-size:0.72rem;font-weight:600;color:var(--white-faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
-.timeline-item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;}
-.t-dot{width:8px;height:8px;min-width:8px;border-radius:50%;margin-top:5px;background:var(--accent-red);}
-.t-dot.gold{background:var(--accent-gold);}
-.t-text{font-size:0.8rem;color:var(--white-dim);line-height:1.5;}
-.t-text strong{color:var(--white);}
+/* ── ASK ZENTRADE ── */
+.ask-container{display:flex;flex-direction:column;height:calc(100vh - 160px);max-height:700px;}
+.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding:20px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.chat-messages::-webkit-scrollbar{width:4px;}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.msg{max-width:80%;display:flex;flex-direction:column;gap:4px;}
+.msg.user{align-self:flex-end;align-items:flex-end;}
+.msg.bot{align-self:flex-start;align-items:flex-start;}
+.msg-bubble{padding:12px 16px;border-radius:14px;font-size:0.86rem;line-height:1.65;}
+.msg.user .msg-bubble{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border-radius:14px 14px 4px 14px;}
+.msg.bot .msg-bubble{background:rgba(255,255,255,0.06);border:1px solid var(--gb);color:var(--dim);border-radius:14px 14px 14px 4px;}
+.msg.bot .msg-bubble strong{color:var(--white);}
+.msg-time{font-size:0.65rem;color:var(--faint);}
+.chat-input-area{padding:16px 20px;border-top:1px solid var(--gb);background:rgba(4,13,26,0.8);display:flex;gap:10px;align-items:flex-end;}
+.chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:11px 14px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;resize:none;max-height:100px;line-height:1.5;}
+.chat-input:focus{border-color:var(--blue);}
+.chat-send{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;width:42px;height:42px;border-radius:10px;cursor:pointer;font-size:1.1rem;transition:opacity 0.2s;flex-shrink:0;}
+.chat-send:hover{opacity:0.85;}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed;}
+.quick-questions{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;}
+.qq{padding:6px 13px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap;}
+.qq:hover{border-color:var(--teal);color:var(--teal);}
 
-/* DASHBOARD */
-.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
-.dash-stat{background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:20px;}
-.dash-stat-lbl{font-size:0.75rem;color:var(--white-dim);margin-bottom:8px;}
-.dash-stat-val{font-family:'DM Mono',monospace;font-size:1.5rem;font-weight:500;}
-.dash-stat-val.green{color:var(--accent-green);}
-.dash-stat-val.red{color:var(--accent-red);}
-.dash-stat-val.blue{color:var(--accent-blue);}
-.dash-stat-val.gold{color:var(--accent-gold);}
-.dash-stat-sub{font-size:0.72rem;color:var(--white-faint);margin-top:4px;}
-.dash-row{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:18px;}
-.d-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:24px;}
-.d-card-title{font-size:0.88rem;font-weight:600;margin-bottom:18px;}
-.recent-trade{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
-.recent-trade:last-child{border-bottom:none;}
-.rt-asset{font-size:0.88rem;font-weight:500;}
-.rt-detail{font-size:0.72rem;color:var(--white-dim);margin-top:2px;}
-.rt-result{font-family:'DM Mono',monospace;font-size:0.88rem;font-weight:600;}
-.rt-result.win{color:var(--accent-green);}
-.rt-result.loss{color:var(--accent-red);}
-.leak-item{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.leak-rank{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--white-faint);width:18px;}
-.leak-bar-wrap{flex:1;}
-.leak-name{font-size:0.8rem;font-weight:500;margin-bottom:4px;}
-.leak-bar-bg{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
-.leak-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent-red),var(--accent-gold));}
-.leak-count{font-size:0.75rem;color:var(--white-dim);font-family:'DM Mono',monospace;}
-.profile-box{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:24px;margin-bottom:18px;}
-.profile-top{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
-.p-avatar{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;}
-.p-name{font-size:1rem;font-weight:600;}
-.p-sub{font-size:0.78rem;color:var(--white-dim);margin-top:3px;}
-.profile-details{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-.p-item-lbl{font-size:0.7rem;color:var(--white-faint);margin-bottom:3px;}
-.p-item-val{font-size:0.85rem;font-weight:500;}
-.danger-zone{background:rgba(232,64,64,0.05);border:1px solid rgba(232,64,64,0.2);border-radius:12px;padding:18px;}
-.danger-title{font-size:0.83rem;font-weight:600;color:var(--accent-red);margin-bottom:6px;}
-.danger-desc{font-size:0.78rem;color:var(--white-dim);line-height:1.6;margin-bottom:14px;}
+/* ── MISTAKE MEMORY ── */
+.stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+.sc{background:var(--glass);border:1px solid var(--gb);border-radius:13px;padding:18px;text-align:center;}
+.sn{font-family:'DM Mono',monospace;font-size:1.7rem;font-weight:500;margin-bottom:4px;}
+.sn.r{color:var(--red);}
+.sn.g{color:var(--green);}
+.sn.b{color:var(--blue);}
+.sn.o{color:var(--gold);}
+.sl{font-size:0.72rem;color:var(--dim);}
+.pc{background:var(--glass);border:1px solid var(--gb);border-radius:15px;padding:24px;margin-bottom:16px;}
+.pc.danger{border-color:rgba(232,64,64,0.35);}
+.pc.warn{border-color:rgba(201,168,76,0.35);}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.pi{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.pi.danger{background:rgba(232,64,64,0.15);}
+.pi.warn{background:rgba(201,168,76,0.15);}
+.pn{font-size:0.92rem;font-weight:600;}
+.pc2{font-size:0.75rem;color:var(--dim);margin-top:2px;}
+.pb{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.pb-bg{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.pb-fill{height:100%;border-radius:3px;}
+.pb-fill.r{background:var(--red);}
+.pb-fill.o{background:var(--gold);}
+.pb-pct{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--dim);}
+.pa{font-size:0.82rem;color:var(--dim);line-height:1.65;padding:12px;background:rgba(255,255,255,0.03);border-radius:9px;margin-bottom:12px;}
+.tl-title{font-size:0.7rem;font-weight:700;color:var(--faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+.tl-item{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}
+.td{width:8px;height:8px;min-width:8px;border-radius:50%;margin-top:5px;background:var(--red);}
+.td.o{background:var(--gold);}
+.tt{font-size:0.78rem;color:var(--dim);line-height:1.5;}
+.tt strong{color:var(--white);}
 
-/* TOAST */
-.toast{position:fixed;bottom:28px;right:28px;background:var(--navy-mid);border:1px solid var(--glass-border);border-radius:12px;padding:14px 18px;z-index:999;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px rgba(0,0,0,0.4);transform:translateY(80px);opacity:0;transition:all 0.4s ease;max-width:340px;}
+/* ── DASHBOARD ── */
+.dg4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.ds{background:var(--glass);border:1px solid var(--gb);border-radius:13px;padding:18px;}
+.dsl{font-size:0.72rem;color:var(--dim);margin-bottom:7px;}
+.dsv{font-family:'DM Mono',monospace;font-size:1.4rem;font-weight:500;}
+.dsv.g{color:var(--green);}
+.dsv.r{color:var(--red);}
+.dsv.b{color:var(--blue);}
+.dsv.o{color:var(--gold);}
+.dss{font-size:0.7rem;color:var(--faint);margin-top:3px;}
+.drow{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px;}
+.dc{background:var(--glass);border:1px solid var(--gb);border-radius:15px;padding:22px;}
+.dct{font-size:0.85rem;font-weight:600;margin-bottom:16px;}
+.rt{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.rt:last-child{border-bottom:none;}
+.rta{font-size:0.85rem;font-weight:500;}
+.rtd{font-size:0.7rem;color:var(--dim);margin-top:2px;}
+.rtr{font-family:'DM Mono',monospace;font-size:0.85rem;font-weight:600;}
+.rtr.w{color:var(--green);}
+.rtr.l{color:var(--red);}
+.li{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+.lrk{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--faint);width:16px;}
+.lbw{flex:1;}
+.ln{font-size:0.78rem;font-weight:500;margin-bottom:3px;}
+.lbb{height:4px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.lbf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--gold));}
+.lc{font-size:0.72rem;color:var(--dim);font-family:'DM Mono',monospace;}
+.prof-box{background:var(--glass);border:1px solid var(--gb);border-radius:15px;padding:22px;margin-bottom:16px;}
+.prof-top{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.pav{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;}
+.pnm{font-size:1rem;font-weight:600;}
+.psb{font-size:0.77rem;color:var(--dim);margin-top:3px;}
+.pdg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.pil{font-size:0.68rem;color:var(--faint);margin-bottom:3px;}
+.piv{font-size:0.83rem;font-weight:500;}
+.dz{background:rgba(232,64,64,0.05);border:1px solid rgba(232,64,64,0.2);border-radius:11px;padding:18px;}
+.dzt{font-size:0.82rem;font-weight:600;color:var(--red);margin-bottom:6px;}
+.dzd{font-size:0.77rem;color:var(--dim);line-height:1.6;margin-bottom:12px;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--mid);border:1px solid var(--gb);border-radius:12px;padding:13px 16px;z-index:999;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px rgba(0,0,0,0.4);transform:translateY(80px);opacity:0;transition:all 0.4s ease;max-width:320px;}
 .toast.show{transform:translateY(0);opacity:1;}
-.toast-msg{font-size:0.85rem;color:var(--white-dim);}
+.toast-msg{font-size:0.83rem;color:var(--dim);}
 .toast-msg strong{color:var(--white);}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
-.modal-overlay.show{display:flex;}
-.modal{background:var(--navy-mid);border:1px solid var(--glass-border);border-radius:20px;padding:38px;max-width:440px;width:90%;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:mi 0.3s ease;}
-@keyframes mi{from{opacity:0;transform:scale(0.92);}to{opacity:1;transform:scale(1);}}
-.modal-icon{font-size:2.4rem;text-align:center;margin-bottom:14px;}
-.modal-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;text-align:center;margin-bottom:10px;}
-.modal-msg{font-size:0.86rem;color:var(--white-dim);text-align:center;line-height:1.65;margin-bottom:26px;}
-.modal-close{width:100%;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;}
+/* ── MODAL ── */
+.mo{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
+.mo.show{display:flex;}
+.md{background:var(--mid);border:1px solid var(--gb);border-radius:20px;padding:36px;max-width:420px;width:90%;box-shadow:0 40px 100px rgba(0,0,0,0.6);animation:mi 0.3s ease;}
+@keyframes mi{from{opacity:0;transform:scale(0.93);}to{opacity:1;transform:scale(1);}}
+.md-icon{font-size:2.4rem;text-align:center;margin-bottom:14px;}
+.md-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;text-align:center;margin-bottom:8px;}
+.md-msg{font-size:0.85rem;color:var(--dim);text-align:center;line-height:1.65;margin-bottom:24px;}
+.md-btn{width:100%;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;}
+
+/* LOADING */
+.loading{display:inline-flex;gap:4px;align-items:center;}
+.loading span{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:ld 1.2s ease-in-out infinite;}
+.loading span:nth-child(2){animation-delay:0.2s;}
+.loading span:nth-child(3){animation-delay:0.4s;}
+@keyframes ld{0%,80%,100%{transform:scale(0.6);opacity:0.4;}40%{transform:scale(1);opacity:1;}}
 
 @media(max-width:900px){
-  nav{padding:14px 20px;}
-  .hero{grid-template-columns:1fr;padding:50px 20px;}
-  .hero-visual-wrap{display:none;}
-  .features-grid{grid-template-columns:1fr 1fr;}
-  .stats-grid,.dash-grid{grid-template-columns:1fr 1fr;}
-  .dash-row{grid-template-columns:1fr;}
-  .form-row,.form-row-3{grid-template-columns:1fr;}
-  .profile-details{grid-template-columns:1fr 1fr;}
-  .container,.page-hero{padding:40px 20px;}
+  nav{padding:12px 18px;}
+  .hero{grid-template-columns:1fr;padding:48px 18px;}
+  .hero-visual{display:none;}
+  .feat-grid{grid-template-columns:1fr 1fr;}
+  .stats4,.dg4{grid-template-columns:1fr 1fr;}
+  .drow{grid-template-columns:1fr;}
+  .frow,.frow3{grid-template-columns:1fr;}
+  .pdg{grid-template-columns:1fr 1fr;}
+  .wrap,.wrap-sm,.wrap-md{padding:36px 18px;}
 }
 @media(max-width:580px){
   .nav-links{display:none;}
-  .features-grid{grid-template-columns:1fr;}
-  .emotion-grid{grid-template-columns:repeat(3,1fr);}
-  .stats-row{flex-wrap:wrap;gap:20px;}
+  .feat-grid{grid-template-columns:1fr;}
+  .emo-grid{grid-template-columns:repeat(3,1fr);}
+  .stats-row{flex-wrap:wrap;gap:18px;}
+  .lo-btns{flex-direction:column;}
 }
 </style>
 </head>
@@ -266,42 +337,53 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 <div class="bg-grid"></div>
 <div class="bg-glow"></div>
 
+<!-- ══ NAV ══ -->
 <nav>
-  <div class="logo" onclick="go('home')"><div class="logo-icon">🧘</div>Zen<span>Trade</span></div>
-  <ul class="nav-links">
+  <div class="logo" onclick="go('home')">
+    <div class="logo-icon">🧘</div>Zen<span>Trade</span>
+  </div>
+  <ul class="nav-links" id="nav-links">
     <li><a id="n-home" class="active" onclick="go('home')">Home</a></li>
-    <li><a id="n-register" onclick="go('register')">Register</a></li>
-    <li><a id="n-journal" onclick="go('journal')">Journal</a></li>
-    <li><a id="n-memory" onclick="go('memory')">Mistake Memory</a></li>
-    <li><a id="n-dashboard" onclick="go('dashboard')">Dashboard</a></li>
+    <li><a id="n-login" onclick="go('login')">Login</a></li>
+    <li><a id="n-journal" class="locked" onclick="requireAuth('journal')">Journal</a></li>
+    <li><a id="n-ask" class="locked" onclick="requireAuth('ask')">Ask ZenTrade</a></li>
+    <li><a id="n-memory" class="locked" onclick="requireAuth('memory')">Mistake Memory</a></li>
+    <li><a id="n-dashboard" class="locked" onclick="requireAuth('dashboard')">Dashboard</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-user" id="nav-ud" style="display:none">Hi, <span id="nav-uname"></span></div>
-    <button class="btn-nav-out" id="nav-logout" style="display:none" onclick="logout()">Logout</button>
-    <button class="btn-nav" id="nav-cta" onclick="go('register')">Get Started Free</button>
+    <div class="nav-user-info" id="nav-ui">
+      <div class="nav-avatar" id="nav-av">?</div>
+      <div class="nav-uname">Hi, <span id="nav-un"></span></div>
+    </div>
+    <button class="btn-n btn-n-ghost" id="nav-reg-btn" onclick="go('register')" style="display:none">Register</button>
+    <button class="btn-n btn-n-outline" id="nav-logout-btn" style="display:none" onclick="logout()">Logout</button>
+    <button class="btn-n btn-n-primary" id="nav-start-btn" onclick="go('register')">Get Started Free</button>
   </div>
 </nav>
 
-<!-- HOME -->
+<!-- ══ HOME PAGE ══ -->
 <div class="page active" id="page-home">
   <div class="hero">
     <div>
-      <div class="hero-badge"><div class="badge-dot"></div>Trading Psychology Intelligence Platform</div>
-      <h1>Master Your <em>Mind.</em><br/>Master The Market.</h1>
-      <p>90% of traders lose not because of bad strategies — but because of uncontrolled emotions. ZenTrade diagnoses your psychology, tracks your patterns, and warns you before you repeat the same costly mistakes.</p>
+      <div class="hero-badge"><div class="bdot"></div>Trading Psychology Intelligence Platform</div>
+      <h1 class="h1">Master Your <em>Mind.</em><br/>Master The Market.</h1>
+      <p class="sub">90% of traders lose not because of bad strategies — but because of uncontrolled emotions. ZenTrade diagnoses your psychology, tracks your patterns, and warns you before you repeat the same costly mistakes.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="go('register')">Start Free — Register Now</button>
-        <button class="btn-secondary" onclick="go('journal')">Open Journal →</button>
+        <button class="btn btn-primary" onclick="go('register')">Start Free — Register Now</button>
+        <button class="btn btn-secondary" onclick="go('login')">Already have account? Login →</button>
       </div>
       <div class="stats-row">
-        <div><div class="stat-num">656<span>+</span></div><div class="stat-label">Psychology Questions</div></div>
-        <div><div class="stat-num">23<span>+</span></div><div class="stat-label">Emotional Categories</div></div>
-        <div><div class="stat-num">13<span>+</span></div><div class="stat-label">Strategies Covered</div></div>
+        <div><div class="snum">656<span>+</span></div><div class="slbl">Psychology Questions</div></div>
+        <div><div class="snum">23<span>+</span></div><div class="slbl">Emotional Categories</div></div>
+        <div><div class="snum">13<span>+</span></div><div class="slbl">Strategies Covered</div></div>
       </div>
     </div>
-    <div class="hero-visual-wrap">
-      <div class="dash-preview">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:0.8rem;color:var(--white-dim)">🧠 Psychological Score — This Week</span><span style="font-size:0.72rem;font-weight:600;color:var(--accent-green);background:rgba(31,214,122,0.1);border:1px solid rgba(31,214,122,0.25);padding:3px 10px;border-radius:100px;">● Improving</span></div>
+    <div class="hero-visual">
+      <div class="preview-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:0.78rem;color:var(--dim)">🧠 Psychology Score — This Week</span>
+          <span style="font-size:0.7rem;font-weight:600;color:var(--green);background:rgba(31,214,122,0.1);border:1px solid rgba(31,214,122,0.25);padding:3px 9px;border-radius:100px;">● Improving</span>
+        </div>
         <div class="mini-chart">
           <div class="bar" style="height:35%"></div><div class="bar loss" style="height:60%"></div>
           <div class="bar loss" style="height:45%"></div><div class="bar" style="height:55%"></div>
@@ -309,224 +391,331 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
           <div class="bar" style="height:50%"></div><div class="bar" style="height:65%"></div>
           <div class="bar" style="height:80%"></div><div class="bar" style="height:90%"></div>
         </div>
-        <div class="metrics-grid">
-          <div class="metric-box"><div class="metric-lbl">Discipline Score</div><div class="metric-val up">78/100</div></div>
-          <div class="metric-box"><div class="metric-lbl">Biggest Leak</div><div class="metric-val down">FOMO</div></div>
-          <div class="metric-box"><div class="metric-lbl">Rule Breaks</div><div class="metric-val blue">3 this week</div></div>
-          <div class="metric-box"><div class="metric-lbl">Best Strategy</div><div class="metric-val up">SMC</div></div>
+        <div class="mg">
+          <div class="mb"><div class="ml">Discipline Score</div><div class="mv up">78/100</div></div>
+          <div class="mb"><div class="ml">Biggest Leak</div><div class="mv dn">FOMO</div></div>
+          <div class="mb"><div class="ml">Rule Breaks</div><div class="mv bl">3 this week</div></div>
+          <div class="mb"><div class="ml">Best Strategy</div><div class="mv up">SMC</div></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container" style="padding-top:0">
-    <div class="section-tag">What ZenTrade Does</div>
-    <h2 class="section-title">One Tool. Every Trading <em>Moment.</em></h2>
-    <p class="section-sub">From before you open charts to after you close the platform — ZenTrade is with you at every critical decision point.</p>
-    <div class="features-grid">
-      <div class="feature-card" onclick="go('journal')"><div class="feature-icon icon-red">📔</div><div class="feature-title">Smart Trade Journal</div><div class="feature-desc">Upload chart screenshot or fill trade details. Journal auto-captures everything — strategy, emotion, result, and lesson permanently.</div></div>
-      <div class="feature-card" onclick="go('memory')"><div class="feature-icon icon-gold">🔁</div><div class="feature-title">Mistake Memory System</div><div class="feature-desc">When you repeat a past mistake — ZenTrade warns you instantly showing exactly when and why it happened before.</div></div>
-      <div class="feature-card" onclick="go('dashboard')"><div class="feature-icon icon-blue">📊</div><div class="feature-title">Psychology Dashboard</div><div class="feature-desc">See your complete trading psychology profile — discipline score, biggest leaks, best strategies, and improvement roadmap.</div></div>
-      <div class="feature-card" onclick="go('register')"><div class="feature-icon icon-teal">👤</div><div class="feature-title">Secure Trader Profile</div><div class="feature-desc">Your data is 100% yours. Register with your details. Delete anytime — data permanently removed after 3 months.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-green">🧠</div><div class="feature-title">656 Psychology Questions</div><div class="feature-desc">Covering every emotional moment — loss, win, revenge trade, FOMO, overtrading and more. Strategy-specific to your style.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-purple">📈</div><div class="feature-title">Pattern Recognition</div><div class="feature-desc">AI analyzes all your trades and identifies your recurring psychological leaks with specific improvement advice.</div></div>
+  <div class="wrap" style="padding-top:0;">
+    <div class="tag">What ZenTrade Does</div>
+    <h2 class="h2">One Tool. Every Trading <em>Moment.</em></h2>
+    <p class="sub">From before you open charts to after you close — ZenTrade guides you at every critical point.</p>
+    <div class="feat-grid">
+      <div class="fc" onclick="go('register')"><div class="fi fi-r">📔</div><div class="ft">Smart Trade Journal</div><div class="fd">Upload chart screenshot + fill trade details. AI analyzes your trade and gives technical + psychological diagnosis instantly.</div></div>
+      <div class="fc" onclick="go('register')"><div class="fi fi-b">💬</div><div class="ft">Ask ZenTrade AI</div><div class="fd">Ask any trading question — about your trade, your emotion, your strategy. Get honest, expert answers anytime you need.</div></div>
+      <div class="fc" onclick="go('register')"><div class="fi fi-g">🔁</div><div class="ft">Mistake Memory System</div><div class="fd">When you repeat a past mistake — ZenTrade warns you instantly showing exactly when and why it happened before.</div></div>
+      <div class="fc" onclick="go('register')"><div class="fi fi-t">📊</div><div class="ft">Psychology Dashboard</div><div class="fd">Your complete trading psychology profile — discipline score, biggest leaks, best strategies, and improvement roadmap.</div></div>
+      <div class="fc" onclick="go('register')"><div class="fi fi-gr">🧠</div><div class="ft">656 Deep Questions</div><div class="fd">Covering every emotional moment — loss, win, revenge trade, FOMO, overtrading. Strategy-specific to your style.</div></div>
+      <div class="fc" onclick="go('register')"><div class="fi fi-p">🔒</div><div class="ft">100% Private & Secure</div><div class="fd">Your data belongs to you. Register, login, and delete anytime. All data permanently removed within 3 months of deletion.</div></div>
     </div>
   </div>
 </div>
 
-<!-- REGISTER -->
+<!-- ══ REGISTER PAGE ══ -->
 <div class="page" id="page-register">
-  <div class="container" style="max-width:680px;">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-tag">Create Your Account</div>
-      <h2 class="section-title">Join <em>ZenTrade</em></h2>
-      <p class="section-sub" style="margin:0 auto;text-align:center;">Register once. Your trading psychology journey begins today. All data is private and under your full control.</p>
-    </div>
-    <div class="card">
-      <div class="form-section">Personal Information</div>
-      <div class="form-row">
-        <div><label class="form-label">Full Name *</label><input class="form-input" id="r-name" placeholder="Your full name" type="text"/></div>
-        <div><label class="form-label">Email Address *</label><input class="form-input" id="r-email" placeholder="your@email.com" type="email"/></div>
-      </div>
-      <div class="form-row">
-        <div><label class="form-label">Mobile Number *</label><input class="form-input" id="r-mobile" placeholder="+91 98765 43210" type="tel"/></div>
-        <div><label class="form-label">Country</label><input class="form-input" id="r-country" placeholder="India" type="text"/></div>
-      </div>
-      <div class="divider"></div>
-      <div class="form-section">Trading Profile</div>
-      <div class="form-row">
-        <div><label class="form-label">Trading Platform *</label>
-          <select class="form-select" id="r-platform">
-            <option value="">Select Platform</option>
-            <option>MT4 (MetaTrader 4)</option><option>MT5 (MetaTrader 5)</option>
-            <option>Zerodha Kite</option><option>Binance</option><option>Coinbase</option>
-            <option>TradingView</option><option>Fyers</option><option>Upstox</option>
-            <option>Angel One</option><option>Other</option>
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo"><div class="logo"><div class="logo-icon">🧘</div>Zen<span>Trade</span></div></div>
+      <div class="auth-card">
+        <div class="auth-title">Create Your Account</div>
+        <div class="auth-sub">Join ZenTrade — your trading psychology journey begins today</div>
+        <div class="frow">
+          <div class="fg"><label class="flabel">Full Name *</label><input class="finput" id="r-name" placeholder="Your full name" type="text"/></div>
+          <div class="fg"><label class="flabel">Email Address *</label><input class="finput" id="r-email" placeholder="your@email.com" type="email"/></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label class="flabel">Mobile Number *</label><input class="finput" id="r-mobile" placeholder="+91 98765 43210" type="tel"/></div>
+          <div class="fg"><label class="flabel">Password *</label><input class="finput" id="r-pass" placeholder="Create a password" type="password"/></div>
+        </div>
+        <div class="fdiv"></div>
+        <div class="frow">
+          <div class="fg"><label class="flabel">Trading Platform *</label>
+            <select class="fselect" id="r-platform">
+              <option value="">Select Platform</option>
+              <option>MT4</option><option>MT5</option><option>Zerodha Kite</option>
+              <option>Binance</option><option>TradingView</option><option>Fyers</option>
+              <option>Upstox</option><option>Angel One</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label class="flabel">Market *</label>
+            <select class="fselect" id="r-market">
+              <option value="">Select Market</option>
+              <option>Forex</option><option>Crypto</option><option>Stocks India</option>
+              <option>Stocks US</option><option>Commodities</option><option>All Markets</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label class="flabel">Trading Style *</label>
+            <select class="fselect" id="r-style">
+              <option value="">Select Style</option>
+              <option>Scalper</option><option>Day Trader</option>
+              <option>Swing Trader</option><option>Positional Trader</option><option>Still Learning</option>
+            </select>
+          </div>
+          <div class="fg"><label class="flabel">Experience *</label>
+            <select class="fselect" id="r-exp">
+              <option value="">Select Level</option>
+              <option>Beginner (0-6 months)</option><option>Beginner (6-12 months)</option>
+              <option>Intermediate (1-3 years)</option><option>Advanced (3+ years)</option>
+              <option>Professional</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label class="flabel">Primary Strategy</label>
+          <select class="fselect" id="r-strategy">
+            <option value="">Select Strategy</option>
+            <option>SMC</option><option>ICT</option><option>Price Action</option>
+            <option>EMA Crossover</option><option>RSI Divergence</option>
+            <option>Breakout Trading</option><option>MACD</option><option>VWAP</option>
+            <option>Volume Analysis</option><option>Multiple Strategies</option>
           </select>
         </div>
-        <div><label class="form-label">Markets You Trade *</label>
-          <select class="form-select" id="r-market">
-            <option value="">Select Market</option>
-            <option>Forex</option><option>Crypto</option><option>Stocks (India)</option>
-            <option>Stocks (US)</option><option>Commodities</option>
-            <option>Forex + Crypto</option><option>All Markets</option>
-          </select>
+        <button class="btn btn-primary btn-full" onclick="register()">🚀 Create My ZenTrade Account</button>
+        <div class="privacy-note" style="margin-top:14px;">
+          <span style="font-size:1.1rem;">🔒</span>
+          <p><strong>Your data is 100% private.</strong> We never sell or share your information. Delete anytime — all data permanently removed within 3 months.</p>
         </div>
+        <div class="auth-switch">Already have an account? <a onclick="go('login')">Login here</a></div>
       </div>
-      <div class="form-row">
-        <div><label class="form-label">Trading Style *</label>
-          <select class="form-select" id="r-style">
-            <option value="">Select Style</option>
-            <option>Scalper</option><option>Day Trader</option>
-            <option>Swing Trader</option><option>Positional Trader</option><option>Still Learning</option>
-          </select>
-        </div>
-        <div><label class="form-label">Experience Level *</label>
-          <select class="form-select" id="r-exp">
-            <option value="">Select Level</option>
-            <option>Complete Beginner (0-6 months)</option><option>Beginner (6-12 months)</option>
-            <option>Intermediate (1-3 years)</option><option>Advanced (3+ years)</option>
-            <option>Professional Trader</option>
-          </select>
-        </div>
-      </div>
-      <div><label class="form-label">Primary Strategy</label>
-        <select class="form-select" id="r-strategy">
-          <option value="">Select Strategy</option>
-          <option>SMC (Smart Money Concepts)</option><option>ICT Concepts</option>
-          <option>Price Action</option><option>EMA Crossover</option>
-          <option>RSI Divergence</option><option>Breakout Trading</option>
-          <option>MACD Strategy</option><option>Volume Analysis</option>
-          <option>Supertrend</option><option>VWAP</option><option>Multiple Strategies</option>
-        </select>
-      </div>
-      <button class="btn-full btn-full-primary" onclick="register()">🚀 Create My ZenTrade Account</button>
-      <div class="privacy-box" style="margin-top:16px;"><span style="font-size:1.2rem;">🔒</span><p><strong>Your data is 100% private and secure.</strong> We never sell or share your information. You can delete your account anytime. After deletion, all data is permanently removed within 3 months — no backup, no trace.</p></div>
     </div>
   </div>
 </div>
 
-<!-- JOURNAL -->
+<!-- ══ LOGIN PAGE ══ -->
+<div class="page" id="page-login">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo"><div class="logo"><div class="logo-icon">🧘</div>Zen<span>Trade</span></div></div>
+      <div class="auth-card">
+        <div class="auth-title">Welcome Back 👋</div>
+        <div class="auth-sub">Login to your ZenTrade account to continue your psychology journey</div>
+        <div class="fg"><label class="flabel">Email Address *</label><input class="finput" id="l-email" placeholder="your@email.com" type="email"/></div>
+        <div class="fg"><label class="flabel">Password *</label><input class="finput" id="l-pass" placeholder="Your password" type="password" onkeydown="if(event.key==='Enter')login()"/></div>
+        <button class="btn btn-primary btn-full" onclick="login()">🔐 Login to ZenTrade</button>
+        <div class="auth-switch">New to ZenTrade? <a onclick="go('register')">Create free account</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JOURNAL PAGE ══ -->
 <div class="page" id="page-journal">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
-      <div><div class="section-tag">Smart Trading Journal</div><h2 class="section-title" style="margin-bottom:0;">Record Every Trade</h2></div>
-      <div class="tabs">
-        <button class="tab active" id="tab-add" onclick="switchTab('add')">+ Add Trade</button>
-        <button class="tab" id="tab-hist" onclick="switchTab('hist')">📋 Trade History</button>
-      </div>
+  <div id="journal-locked" class="locked-overlay" style="display:none;">
+    <div class="lo-icon">🔐</div>
+    <div class="lo-title">Login Required</div>
+    <div class="lo-sub">You need to login to access your Trading Journal. Your data is private and secure.</div>
+    <div class="lo-btns">
+      <button class="btn btn-primary" onclick="go('login')">Login to ZenTrade</button>
+      <button class="btn btn-secondary" onclick="go('register')">Create Free Account</button>
     </div>
-
-    <div id="add-content">
-      <div class="card" style="margin-bottom:24px;">
-        <div style="font-size:0.95rem;font-weight:600;margin-bottom:20px;">📸 Upload Chart Screenshot</div>
-        <div class="upload-zone" id="upload-zone">
-          <input type="file" accept="image/*" id="chart-file" onchange="previewImg(this)"/>
-          <div class="upload-icon">📊</div>
-          <div class="upload-text">Drag & drop your chart screenshot here<br/><span>or click to browse</span></div>
-          <img id="img-preview" class="upload-preview" alt="preview"/>
+  </div>
+  <div id="journal-content" style="display:none;">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;flex-wrap:wrap;gap:14px;">
+        <div><div class="tag">Smart Trading Journal</div><h2 class="h2" style="margin-bottom:0;">Record Every Trade</h2></div>
+        <div class="jtabs">
+          <button class="jtab active" id="jt-add" onclick="switchJTab('add')">+ Add Trade</button>
+          <button class="jtab" id="jt-hist" onclick="switchJTab('hist')">📋 Trade History</button>
         </div>
-        <div style="font-size:0.95rem;font-weight:600;margin-bottom:18px;">📝 Trade Details</div>
-        <div class="form-row-3">
-          <div><label class="form-label">Asset / Pair *</label><input class="form-input" id="j-asset" placeholder="BTC/USDT, EUR/USD..."/></div>
-          <div><label class="form-label">Timeframe</label>
-            <select class="form-select" id="j-tf"><option>1 Min</option><option>5 Min</option><option>15 Min</option><option>30 Min</option><option>1 Hour</option><option>4 Hours</option><option>Daily</option><option>Weekly</option></select>
-          </div>
-          <div><label class="form-label">Strategy Used</label>
-            <select class="form-select" id="j-strat"><option>SMC</option><option>ICT</option><option>Price Action</option><option>EMA Crossover</option><option>RSI Divergence</option><option>Breakout</option><option>MACD</option><option>VWAP</option><option>Volume</option><option>Supertrend</option><option>Other</option></select>
-          </div>
-        </div>
-        <div class="form-row-3">
-          <div><label class="form-label">Entry Price</label><input class="form-input" id="j-entry" type="number" placeholder="0.00"/></div>
-          <div><label class="form-label">Exit Price</label><input class="form-input" id="j-exit" type="number" placeholder="0.00"/></div>
-          <div><label class="form-label">Lot / Position Size</label><input class="form-input" id="j-lot" type="number" placeholder="0.01"/></div>
-        </div>
-        <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;">✅ Trade Result *</div>
-        <div class="result-btns">
-          <button class="result-btn win" id="rb-win" onclick="setResult('win')">🟢 WIN</button>
-          <button class="result-btn loss" id="rb-loss" onclick="setResult('loss')">🔴 LOSS</button>
-        </div>
-        <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;">🧠 How Were You Feeling? *</div>
-        <div class="emotion-grid">
-          <button class="emotion-btn" onclick="setEmotion(this,'calm')"><span class="emotion-emoji">😌</span>Calm</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'anxious')"><span class="emotion-emoji">😰</span>Anxious</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'greedy')"><span class="emotion-emoji">🤑</span>Greedy</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'fearful')"><span class="emotion-emoji">😨</span>Fearful</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'confident')"><span class="emotion-emoji">💪</span>Confident</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'frustrated')"><span class="emotion-emoji">😤</span>Frustrated</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'excited')"><span class="emotion-emoji">🔥</span>Excited</button>
-          <button class="emotion-btn" onclick="setEmotion(this,'bored')"><span class="emotion-emoji">😑</span>Bored</button>
-        </div>
-        <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;">📝 Your Notes</div>
-        <textarea class="form-input" id="j-notes" rows="4" placeholder="What happened? Why you entered. What went right or wrong. What you learned..."></textarea>
-        <div><label class="form-label">Which Rule Did You Break? (if any)</label>
-          <select class="form-select" id="j-rule">
-            <option value="">No rule broken</option>
-            <option>Moved stop loss</option><option>Entered without confirmation</option>
-            <option>Overtraded</option><option>Revenge traded</option>
-            <option>Ignored higher timeframe</option><option>FOMO entry</option>
-            <option>Over-leveraged</option><option>Traded without a plan</option>
-            <option>Exited too early</option><option>Held losing trade too long</option>
-            <option>Chased price</option><option>Traded during news</option>
-          </select>
-        </div>
-        <button class="btn-full btn-full-primary" style="margin-top:8px;" onclick="saveTrade()">💾 Save Trade to Journal</button>
       </div>
-    </div>
 
-    <div id="hist-content" style="display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-        <div style="font-size:0.95rem;font-weight:600;">Your Trade History</div>
-        <div style="font-size:0.8rem;color:var(--white-dim);" id="entry-count">0 trades</div>
+      <!-- ADD TAB -->
+      <div id="jc-add">
+        <div class="card" style="margin-bottom:20px;">
+          <div style="font-size:0.92rem;font-weight:600;margin-bottom:16px;">📸 Upload Chart Screenshot <span style="font-size:0.75rem;color:var(--dim);font-weight:400;">(Optional but recommended)</span></div>
+          <div class="upload-zone" id="uz">
+            <input type="file" accept="image/*" id="j-file" onchange="prevImg(this)"/>
+            <div style="font-size:2rem;margin-bottom:8px;">📊</div>
+            <div style="font-size:0.85rem;color:var(--dim);">Drag & drop chart screenshot here or <span style="color:var(--blue);font-weight:600;">click to browse</span></div>
+            <img id="j-prev" class="upload-prev" alt="preview"/>
+          </div>
+
+          <div style="font-size:0.92rem;font-weight:600;margin-bottom:14px;">📝 Trade Details</div>
+          <div class="frow3">
+            <div class="fg"><label class="flabel">Asset / Pair *</label><input class="finput" id="j-asset" placeholder="BTC/USDT, EUR/USD, NIFTY..."/></div>
+            <div class="fg"><label class="flabel">Timeframe</label>
+              <select class="fselect" id="j-tf"><option>1 Min</option><option>5 Min</option><option>15 Min</option><option>30 Min</option><option>1 Hour</option><option>4 Hours</option><option>Daily</option><option>Weekly</option></select>
+            </div>
+            <div class="fg"><label class="flabel">Strategy Used</label>
+              <select class="fselect" id="j-strat"><option>SMC</option><option>ICT</option><option>Price Action</option><option>EMA Crossover</option><option>RSI Divergence</option><option>Breakout</option><option>MACD</option><option>VWAP</option><option>Volume</option><option>Supertrend</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="frow3">
+            <div class="fg"><label class="flabel">Entry Price</label><input class="finput" id="j-entry" type="number" placeholder="0.00"/></div>
+            <div class="fg"><label class="flabel">Exit Price</label><input class="finput" id="j-exit" type="number" placeholder="0.00"/></div>
+            <div class="fg"><label class="flabel">Position Size / Lot</label><input class="finput" id="j-lot" type="number" placeholder="0.01"/></div>
+          </div>
+
+          <div style="font-size:0.92rem;font-weight:600;margin-bottom:12px;">✅ Trade Result *</div>
+          <div class="res-btns">
+            <button class="res-btn win" id="rb-w" onclick="setRes('win')">🟢 WIN</button>
+            <button class="res-btn loss" id="rb-l" onclick="setRes('loss')">🔴 LOSS</button>
+          </div>
+
+          <div style="font-size:0.92rem;font-weight:600;margin-bottom:12px;">🧠 How Were You Feeling Before This Trade? *</div>
+          <div class="emo-grid">
+            <button class="emo-btn" onclick="setEmo(this,'calm')"><span class="emo-e">😌</span>Calm</button>
+            <button class="emo-btn" onclick="setEmo(this,'anxious')"><span class="emo-e">😰</span>Anxious</button>
+            <button class="emo-btn" onclick="setEmo(this,'greedy')"><span class="emo-e">🤑</span>Greedy</button>
+            <button class="emo-btn" onclick="setEmo(this,'fearful')"><span class="emo-e">😨</span>Fearful</button>
+            <button class="emo-btn" onclick="setEmo(this,'confident')"><span class="emo-e">💪</span>Confident</button>
+            <button class="emo-btn" onclick="setEmo(this,'frustrated')"><span class="emo-e">😤</span>Frustrated</button>
+            <button class="emo-btn" onclick="setEmo(this,'excited')"><span class="emo-e">🔥</span>Excited</button>
+            <button class="emo-btn" onclick="setEmo(this,'bored')"><span class="emo-e">😑</span>Bored</button>
+          </div>
+
+          <div class="fg"><label class="flabel">📝 What Happened? Describe in your own words</label>
+            <textarea class="ftextarea" id="j-notes" rows="3" placeholder="Why did you enter this trade? What was your analysis? What happened during the trade? What did you feel?"></textarea>
+          </div>
+          <div class="fg"><label class="flabel">⚠️ Which Rule Did You Break? (If any)</label>
+            <select class="fselect" id="j-rule">
+              <option value="">No rule broken — I followed my system</option>
+              <option>Moved stop loss</option><option>Entered without confirmation</option>
+              <option>Overtraded — too many trades today</option><option>Revenge traded</option>
+              <option>Ignored higher timeframe</option><option>FOMO entry</option>
+              <option>Over-leveraged</option><option>Traded without a plan</option>
+              <option>Exited too early</option><option>Held losing trade too long</option>
+              <option>Chased price</option><option>Traded during news</option>
+              <option>Traded while emotional</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-full" id="save-btn" onclick="saveTrade()">💾 Save Trade & Get AI Analysis</button>
+
+          <!-- AI ANALYSIS OUTPUT -->
+          <div class="ai-box" id="ai-analysis-box" style="display:none;">
+            <div class="ai-box-title">🤖 ZenTrade AI Analysis</div>
+            <div class="ai-box-content" id="ai-analysis-text">
+              <div class="loading"><span></span><span></span><span></span></div> Analyzing your trade...
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="entries-list"></div>
+
+      <!-- HISTORY TAB -->
+      <div id="jc-hist" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div style="font-size:0.92rem;font-weight:600;">Your Trade History</div>
+          <div style="font-size:0.78rem;color:var(--dim);" id="entry-cnt">0 trades</div>
+        </div>
+        <div id="entries-list"></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MISTAKE MEMORY -->
+<!-- ══ ASK ZENTRADE PAGE ══ -->
+<div class="page" id="page-ask">
+  <div id="ask-locked" class="locked-overlay" style="display:none;">
+    <div class="lo-icon">🔐</div>
+    <div class="lo-title">Login Required</div>
+    <div class="lo-sub">Login to access the ZenTrade AI assistant — ask any trading question, get expert psychology and strategy guidance.</div>
+    <div class="lo-btns">
+      <button class="btn btn-primary" onclick="go('login')">Login to ZenTrade</button>
+      <button class="btn btn-secondary" onclick="go('register')">Create Free Account</button>
+    </div>
+  </div>
+  <div id="ask-content" style="display:none;">
+    <div class="wrap" style="padding-bottom:0;">
+      <div class="tag">AI Trading Coach</div>
+      <h2 class="h2">Ask <em>ZenTrade</em> Anything</h2>
+      <p class="sub" style="margin-bottom:20px;">Ask about your trade, your emotions, your strategy, your psychology. Get honest and expert guidance — anytime you need it.</p>
+    </div>
+    <div class="wrap-md" style="padding-top:0;">
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="quick-questions">
+          <button class="qq" onclick="quickQ('Why do I keep revenge trading?')">Why do I keep revenge trading?</button>
+          <button class="qq" onclick="quickQ('How do I control FOMO?')">How do I control FOMO?</button>
+          <button class="qq" onclick="quickQ('Is my SMC entry valid?')">Is my SMC entry valid?</button>
+          <button class="qq" onclick="quickQ('When should I stop trading for the day?')">When should I stop trading for the day?</button>
+          <button class="qq" onclick="quickQ('How to manage risk properly?')">How to manage risk properly?</button>
+          <button class="qq" onclick="quickQ('What is trading psychology?')">What is trading psychology?</button>
+        </div>
+        <div class="chat-messages" id="chat-msgs">
+          <div class="msg bot">
+            <div class="msg-bubble">👋 Welcome to <strong>ZenTrade AI</strong>!<br/><br/>I am your personal trading psychology coach. Ask me anything about:<br/>• Your trades and what went wrong<br/>• How to control emotions like FOMO, greed, fear<br/>• Trading strategies — SMC, ICT, Price Action and more<br/>• How to build discipline and consistency<br/><br/>I am here to help you become a better trader. What would you like to know?</div>
+            <div class="msg-time">ZenTrade AI</div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <textarea class="chat-input" id="chat-in" placeholder="Ask me anything about trading, psychology, strategy..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea>
+          <button class="chat-send" id="chat-send-btn" onclick="sendMsg()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MISTAKE MEMORY PAGE ══ -->
 <div class="page" id="page-memory">
-  <div class="container">
-    <div class="section-tag">Mistake Memory System</div>
-    <h2 class="section-title">Your Psychological <em>Pattern Report</em></h2>
-    <p class="section-sub">This page shows your recurring mistakes based on your journal. The more trades you record — the more accurate this becomes.</p>
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-big blue" id="mm-total">0</div><div class="stat-lbl">Total Trades</div></div>
-      <div class="stat-card"><div class="stat-big green" id="mm-wins">0</div><div class="stat-lbl">Wins</div></div>
-      <div class="stat-card"><div class="stat-big red" id="mm-losses">0</div><div class="stat-lbl">Losses</div></div>
-      <div class="stat-card"><div class="stat-big gold" id="mm-breaks">0</div><div class="stat-lbl">Rule Breaks</div></div>
+  <div id="mem-locked" class="locked-overlay" style="display:none;">
+    <div class="lo-icon">🔐</div>
+    <div class="lo-title">Login Required</div>
+    <div class="lo-sub">Login to see your Mistake Memory — your recurring patterns and psychological leaks based on your trade journal.</div>
+    <div class="lo-btns">
+      <button class="btn btn-primary" onclick="go('login')">Login to ZenTrade</button>
+      <button class="btn btn-secondary" onclick="go('register')">Create Free Account</button>
     </div>
-    <div id="memory-content"></div>
+  </div>
+  <div id="mem-content" style="display:none;">
+    <div class="wrap">
+      <div class="tag">Mistake Memory System</div>
+      <h2 class="h2">Your Psychological <em>Pattern Report</em></h2>
+      <p class="sub">Based on your journal entries — the more you record, the more accurate this becomes.</p>
+      <div class="stats4">
+        <div class="sc"><div class="sn b" id="mm-t">0</div><div class="sl">Total Trades</div></div>
+        <div class="sc"><div class="sn g" id="mm-w">0</div><div class="sl">Wins</div></div>
+        <div class="sc"><div class="sn r" id="mm-l">0</div><div class="sl">Losses</div></div>
+        <div class="sc"><div class="sn o" id="mm-b">0</div><div class="sl">Rule Breaks</div></div>
+      </div>
+      <div id="mem-patterns"></div>
+    </div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- ══ DASHBOARD PAGE ══ -->
 <div class="page" id="page-dashboard">
-  <div class="container">
-    <div style="margin-bottom:32px;">
-      <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">Good day, <span id="d-name" style="color:var(--accent-teal)">Trader</span> 👋</h2>
-      <p style="color:var(--white-dim);font-size:0.88rem;margin-top:4px;">Here is your complete trading psychology profile.</p>
+  <div id="dash-locked" class="locked-overlay" style="display:none;">
+    <div class="lo-icon">🔐</div>
+    <div class="lo-title">Login Required</div>
+    <div class="lo-sub">Login to see your complete trading psychology dashboard and profile.</div>
+    <div class="lo-btns">
+      <button class="btn btn-primary" onclick="go('login')">Login to ZenTrade</button>
+      <button class="btn btn-secondary" onclick="go('register')">Create Free Account</button>
     </div>
-    <div class="dash-grid">
-      <div class="dash-stat"><div class="dash-stat-lbl">Total Trades</div><div class="dash-stat-val blue" id="d-total">0</div><div class="dash-stat-sub">All time</div></div>
-      <div class="dash-stat"><div class="dash-stat-lbl">Win Rate</div><div class="dash-stat-val green" id="d-wr">0%</div><div class="dash-stat-sub">Based on journal</div></div>
-      <div class="dash-stat"><div class="dash-stat-lbl">Rule Break Rate</div><div class="dash-stat-val red" id="d-br">0%</div><div class="dash-stat-sub">Target: 0%</div></div>
-      <div class="dash-stat"><div class="dash-stat-lbl">Discipline Score</div><div class="dash-stat-val gold" id="d-ds">—</div><div class="dash-stat-sub">Out of 100</div></div>
-    </div>
-    <div class="dash-row">
-      <div class="d-card"><div class="d-card-title">📋 Recent Trades</div><div id="d-recent"></div></div>
-      <div class="d-card"><div class="d-card-title">🔍 Top Psychological Leaks</div><div id="d-leaks"></div></div>
-    </div>
-    <div class="profile-box" id="d-profile-box">
-      <div class="d-card-title" style="margin-bottom:18px;">👤 Your Trader Profile</div>
-      <div class="profile-top">
-        <div class="p-avatar" id="d-avatar">?</div>
-        <div><div class="p-name" id="d-pname">Not Registered</div><div class="p-sub" id="d-psub">Register to save your profile</div></div>
+  </div>
+  <div id="dash-content" style="display:none;">
+    <div class="wrap">
+      <div style="margin-bottom:28px;">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">Good day, <span id="d-name" style="color:var(--teal)">Trader</span> 👋</h2>
+        <p style="color:var(--dim);font-size:0.85rem;margin-top:4px;" id="d-sub">Here is your complete trading psychology profile.</p>
       </div>
-      <div class="profile-details" id="d-pdetails"></div>
-      <div class="danger-zone">
-        <div class="danger-title">⚠️ Delete Account & Data</div>
-        <div class="danger-desc">If you delete your account, all your journal entries, trade history, and personal data will be permanently removed from ZenTrade within 3 months. This action cannot be undone after the 3-month window passes.</div>
-        <button class="btn-full btn-full-danger" onclick="confirmDelete()">Delete My Account & All Data</button>
+      <div class="dg4">
+        <div class="ds"><div class="dsl">Total Trades</div><div class="dsv b" id="d-tot">0</div><div class="dss">All time</div></div>
+        <div class="ds"><div class="dsl">Win Rate</div><div class="dsv g" id="d-wr">0%</div><div class="dss">Based on journal</div></div>
+        <div class="ds"><div class="dsl">Rule Break Rate</div><div class="dsv r" id="d-br">0%</div><div class="dss">Target: 0%</div></div>
+        <div class="ds"><div class="dsl">Discipline Score</div><div class="dsv o" id="d-ds">—</div><div class="dss">Out of 100</div></div>
+      </div>
+      <div class="drow">
+        <div class="dc"><div class="dct">📋 Recent Trades</div><div id="d-recent"></div></div>
+        <div class="dc"><div class="dct">🔍 Top Psychological Leaks</div><div id="d-leaks"></div></div>
+      </div>
+      <div class="prof-box" id="d-prof">
+        <div class="dct" style="margin-bottom:18px;">👤 Your Trader Profile</div>
+        <div class="prof-top">
+          <div class="pav" id="d-av">?</div>
+          <div><div class="pnm" id="d-pnm">Not Registered</div><div class="psb" id="d-psb">Register to save your profile</div></div>
+        </div>
+        <div class="pdg" id="d-pdg"></div>
+        <div class="dz">
+          <div class="dzt">⚠️ Delete Account & All Data</div>
+          <div class="dzd">If you delete your account, all your journal entries, trade history, and personal data will be permanently removed from ZenTrade within 3 months. This action cannot be reversed after the 3-month window.</div>
+          <button class="btn btn-danger btn-full" onclick="confirmDelete()">Delete My Account & All Data</button>
+        </div>
       </div>
     </div>
   </div>
@@ -534,326 +723,650 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 
 <!-- TOAST -->
 <div class="toast" id="toast">
-  <span id="toast-icon">✅</span>
-  <div class="toast-msg" id="toast-msg"></div>
+  <span id="t-icon">✅</span>
+  <div class="toast-msg" id="t-msg"></div>
 </div>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modal-ov" onclick="closeModal(event)">
-  <div class="modal">
-    <div class="modal-icon" id="m-icon">✅</div>
-    <div class="modal-title" id="m-title">Title</div>
-    <div class="modal-msg" id="m-msg">Message</div>
-    <button class="modal-close" id="m-btn" onclick="document.getElementById('modal-ov').classList.remove('show')">Got it!</button>
+<div class="mo" id="modal" onclick="closeModal(event)">
+  <div class="md">
+    <div class="md-icon" id="m-ico">✅</div>
+    <div class="md-title" id="m-ttl">Title</div>
+    <div class="md-msg" id="m-msg">Message</div>
+    <button class="md-btn" id="m-btn" onclick="document.getElementById('modal').classList.remove('show')">Got it!</button>
   </div>
 </div>
 
 <script>
-// ── STATE ──
-let user = null, trades = [], selResult = '', selEmotion = '';
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let session = null; // logged in user
+let trades = [];
+let selRes = '', selEmo = '';
+let chatHistory = [];
 
-const EMOTIONS = {calm:'😌',anxious:'😰',greedy:'🤑',fearful:'😨',confident:'💪',frustrated:'😤',excited:'🔥',bored:'😑'};
-const EMOTION_ADVICE = {
-  greedy:'Greed makes you hold too long or size too big. Use hard take-profit levels and never move them.',
-  anxious:'Anxiety causes early exits or late entries. Slow down — breathe — follow your system.',
-  fearful:'Fear stops you following your system. Trust your backtested rules. Fear is just uncertainty.',
-  frustrated:'Frustration leads to revenge trading. Step away from the screen immediately when frustrated.',
+const EMOJIS = {calm:'😌',anxious:'😰',greedy:'🤑',fearful:'😨',confident:'💪',frustrated:'😤',excited:'🔥',bored:'😑'};
+const EMO_ADVICE = {
+  greedy:'Greed makes you hold too long or oversize. Set hard take-profit levels and never move them.',
+  anxious:'Anxiety causes early exits or late entries. Slow down. Follow your checklist step by step.',
+  fearful:'Fear stops you following your own system. Trust your backtested rules. Fear is just uncertainty.',
+  frustrated:'Frustration leads directly to revenge trading. Step away from the screen immediately.',
   excited:'Over-excitement causes impulsive entries. Wait for FULL confirmation — every single time.',
-  bored:'Boredom forces trades. No setup = no trade. Patience is a skill — and a profitable one.',
-  confident:'Overconfidence leads to ignoring rules. Stay humble. Every trade is a new probability.',
-  calm:'Even in calm states — always follow your checklist. Calm does not mean correct.'
+  bored:'Boredom forces trades that don\'t exist. No valid setup = no trade. Patience is profit.',
+  confident:'Overconfidence makes you ignore rules. Stay humble. Every single trade is a new probability.',
+  calm:'Even in calm states — always follow your pre-trade checklist without skipping steps.'
 };
 
-// ── INIT ──
-window.onload = ()=>{ load(); updateNav(); };
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+window.onload = () => {
+  loadState();
+  updateNav();
+};
 
-function load(){
-  try{ const u=localStorage.getItem('zt_u'); if(u) user=JSON.parse(u); }catch(e){}
-  try{ const t=localStorage.getItem('zt_t'); if(t) trades=JSON.parse(t); }catch(e){}
-}
-function save(){
-  if(user) localStorage.setItem('zt_u',JSON.stringify(user));
-  localStorage.setItem('zt_t',JSON.stringify(trades));
+function loadState() {
+  try { const s = localStorage.getItem('zt_session'); if(s) session = JSON.parse(s); } catch(e){}
+  try {
+    if(session) {
+      const t = localStorage.getItem('zt_trades_'+session.email);
+      if(t) trades = JSON.parse(t);
+    }
+  } catch(e){}
 }
 
-// ── NAV ──
-function go(pg){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('page-'+pg).classList.add('active');
-  const el=document.getElementById('n-'+pg); if(el) el.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(pg==='journal') renderEntries();
-  if(pg==='memory') renderMemory();
-  if(pg==='dashboard') renderDashboard();
-}
-function updateNav(){
-  if(user){
-    document.getElementById('nav-ud').style.display='flex';
-    document.getElementById('nav-uname').textContent=user.name.split(' ')[0];
-    document.getElementById('nav-logout').style.display='block';
-    document.getElementById('nav-cta').style.display='none';
-  } else {
-    document.getElementById('nav-ud').style.display='none';
-    document.getElementById('nav-logout').style.display='none';
-    document.getElementById('nav-cta').style.display='block';
+function saveState() {
+  if(session) {
+    localStorage.setItem('zt_session', JSON.stringify(session));
+    localStorage.setItem('zt_trades_'+session.email, JSON.stringify(trades));
   }
 }
-function logout(){
-  user=null; localStorage.removeItem('zt_u');
-  updateNav(); go('home');
-  toast('👋','Logged out successfully.');
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function go(pg) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  const nl = document.getElementById('n-'+pg);
+  if(nl) nl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(pg==='journal') renderJournalPage();
+  if(pg==='ask') renderAskPage();
+  if(pg==='memory') renderMemoryPage();
+  if(pg==='dashboard') renderDashboard();
 }
 
-// ── REGISTER ──
-function register(){
-  const n=v('r-name'),e=v('r-email'),m=v('r-mobile'),
-        p=sv('r-platform'),mk=sv('r-market'),
-        st=sv('r-style'),ex=sv('r-exp');
-  if(!n||!e||!m||!p||!mk||!st||!ex){ toast('⚠️','Please fill all required fields!'); return; }
-  user={name:n,email:e,mobile:m,country:v('r-country')||'—',
-        platform:p,market:mk,style:st,exp:ex,strategy:sv('r-strategy')||'—',
-        joined:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})};
-  save(); updateNav();
-  modal('🎉','Welcome to ZenTrade!','Your profile has been created successfully, '+n.split(' ')[0]+'! Start recording your trades in the Journal to build your psychological profile. Your journey to becoming a disciplined trader starts now!');
-  document.getElementById('m-btn').onclick=()=>{ document.getElementById('modal-ov').classList.remove('show'); go('journal'); };
+function requireAuth(pg) {
+  if(session) { go(pg); }
+  else { showModal('🔐','Login Required','You need to login to ZenTrade first before accessing this feature. Your data is private and secure.'); document.getElementById('m-btn').onclick=()=>{document.getElementById('modal').classList.remove('show');go('login');}; document.getElementById('m-btn').textContent='Go to Login'; }
 }
 
-// ── JOURNAL ──
-function switchTab(t){
-  document.getElementById('add-content').style.display=t==='add'?'block':'none';
-  document.getElementById('hist-content').style.display=t==='hist'?'block':'none';
-  document.getElementById('tab-add').classList.toggle('active',t==='add');
-  document.getElementById('tab-hist').classList.toggle('active',t==='hist');
+function updateNav() {
+  const loggedIn = !!session;
+  // locked nav items
+  ['journal','ask','memory','dashboard'].forEach(pg => {
+    const el = document.getElementById('n-'+pg);
+    if(!el) return;
+    if(loggedIn) { el.classList.remove('locked'); el.onclick = ()=>go(pg); }
+    else { el.classList.add('locked'); el.onclick = ()=>requireAuth(pg); }
+  });
+  // login nav
+  const loginLink = document.getElementById('n-login');
+  if(loggedIn) { loginLink.style.display='none'; }
+  else { loginLink.style.display='block'; }
+  // nav right
+  document.getElementById('nav-ui').style.display = loggedIn ? 'flex' : 'none';
+  document.getElementById('nav-logout-btn').style.display = loggedIn ? 'block' : 'none';
+  document.getElementById('nav-start-btn').style.display = loggedIn ? 'none' : 'block';
+  document.getElementById('nav-reg-btn').style.display = loggedIn ? 'none' : 'none';
+  if(loggedIn) {
+    document.getElementById('nav-av').textContent = session.name.charAt(0).toUpperCase();
+    document.getElementById('nav-un').textContent = session.name.split(' ')[0];
+  }
+}
+
+// ═══════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════
+function register() {
+  const name=gv('r-name'),email=gv('r-email'),mobile=gv('r-mobile'),pass=gv('r-pass');
+  const platform=gs('r-platform'),market=gs('r-market'),style=gs('r-style'),exp=gs('r-exp');
+  if(!name||!email||!mobile||!pass) { toast('⚠️','Please fill all required fields!'); return; }
+  if(!platform||!market||!style||!exp) { toast('⚠️','Please fill all trading profile fields!'); return; }
+  if(pass.length < 4) { toast('⚠️','Password must be at least 4 characters!'); return; }
+
+  // check if email already exists
+  const existing = localStorage.getItem('zt_user_'+email);
+  if(existing) { toast('⚠️','This email is already registered! Please login instead.'); return; }
+
+  const user = {
+    name,email,mobile,platform,market,style,exp,
+    strategy:gs('r-strategy')||'Not specified',
+    pass,
+    joined:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})
+  };
+  localStorage.setItem('zt_user_'+email, JSON.stringify(user));
+  session = user;
+  trades = [];
+  saveState();
+  updateNav();
+  showModal('🎉','Welcome to ZenTrade, '+name.split(' ')[0]+'!','Your account has been created successfully. You can now access your Journal, Ask ZenTrade AI, Mistake Memory, and Dashboard. Start recording your first trade!');
+  document.getElementById('m-btn').onclick = () => { document.getElementById('modal').classList.remove('show'); go('journal'); };
+  document.getElementById('m-btn').textContent = 'Go to Journal →';
+}
+
+function login() {
+  const email=gv('l-email'), pass=gv('l-pass');
+  if(!email||!pass) { toast('⚠️','Please enter your email and password!'); return; }
+  const stored = localStorage.getItem('zt_user_'+email);
+  if(!stored) { toast('❌','No account found with this email. Please register first!'); return; }
+  const user = JSON.parse(stored);
+  if(user.pass !== pass) { toast('❌','Incorrect password. Please try again!'); return; }
+  session = user;
+  const t = localStorage.getItem('zt_trades_'+email);
+  trades = t ? JSON.parse(t) : [];
+  saveState();
+  updateNav();
+  document.getElementById('l-email').value='';
+  document.getElementById('l-pass').value='';
+  toast('✅','<strong>Welcome back, '+user.name.split(' ')[0]+'!</strong> You are now logged in.');
+  go('dashboard');
+}
+
+function logout() {
+  session = null;
+  trades = [];
+  selRes=''; selEmo='';
+  chatHistory = [];
+  localStorage.removeItem('zt_session');
+  updateNav();
+  go('home');
+  toast('👋','You have been logged out successfully.');
+}
+
+// ═══════════════════════════════════════
+// JOURNAL
+// ═══════════════════════════════════════
+function renderJournalPage() {
+  if(!session) {
+    document.getElementById('journal-locked').style.display='flex';
+    document.getElementById('journal-content').style.display='none';
+  } else {
+    document.getElementById('journal-locked').style.display='none';
+    document.getElementById('journal-content').style.display='block';
+  }
+}
+
+function switchJTab(t) {
+  document.getElementById('jc-add').style.display = t==='add'?'block':'none';
+  document.getElementById('jc-hist').style.display = t==='hist'?'block':'none';
+  document.getElementById('jt-add').classList.toggle('active',t==='add');
+  document.getElementById('jt-hist').classList.toggle('active',t==='hist');
   if(t==='hist') renderEntries();
 }
-function previewImg(inp){
-  if(inp.files&&inp.files[0]){
+
+function prevImg(inp) {
+  if(inp.files&&inp.files[0]) {
     const r=new FileReader();
-    r.onload=e=>{const p=document.getElementById('img-preview');p.src=e.target.result;p.style.display='block';};
+    r.onload=e=>{const p=document.getElementById('j-prev');p.src=e.target.result;p.style.display='block';};
     r.readAsDataURL(inp.files[0]);
   }
 }
-function setResult(r){
-  selResult=r;
-  document.getElementById('rb-win').classList.toggle('sel',r==='win');
-  document.getElementById('rb-loss').classList.toggle('sel',r==='loss');
+
+function setRes(r) {
+  selRes=r;
+  document.getElementById('rb-w').classList.toggle('sel',r==='win');
+  document.getElementById('rb-l').classList.toggle('sel',r==='loss');
 }
-function setEmotion(btn,e){
-  document.querySelectorAll('.emotion-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected'); selEmotion=e;
+
+function setEmo(btn,e) {
+  document.querySelectorAll('.emo-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel'); selEmo=e;
 }
-function saveTrade(){
-  const asset=v('j-asset');
-  if(!asset){ toast('⚠️','Please enter the asset/pair name!'); return; }
-  if(!selResult){ toast('⚠️','Please select WIN or LOSS!'); return; }
-  if(!selEmotion){ toast('⚠️','Please select your emotion!'); return; }
-  const rule=sv('j-rule');
+
+async function saveTrade() {
+  const asset=gv('j-asset');
+  if(!asset){toast('⚠️','Please enter the asset or pair name!');return;}
+  if(!selRes){toast('⚠️','Please select WIN or LOSS!');return;}
+  if(!selEmo){toast('⚠️','Please select how you were feeling!');return;}
+
+  const rule = gs('j-rule');
+  const notes = gv('j-notes');
+
   // check repeat mistake
-  let repeat=null;
-  if(rule){
-    const past=trades.find(t=>t.rule===rule&&t.result==='loss');
-    if(past) repeat={date:past.date,asset:past.asset};
+  let repeat = null;
+  if(rule && rule !== '') {
+    const past = trades.find(t=>t.rule===rule&&t.result==='loss');
+    if(past) repeat = {date:past.date,asset:past.asset};
   }
-  const trade={
+
+  const trade = {
     id:Date.now(),
     date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),
     time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),
-    asset,tf:sv('j-tf'),strat:sv('j-strat'),
-    entry:v('j-entry'),exit:v('j-exit'),lot:v('j-lot'),
-    notes:v('j-notes'),result:selResult,
-    emotion:selEmotion,emoji:EMOTIONS[selEmotion]||'😐',
-    rule,repeat
+    asset,tf:gs('j-tf'),strat:gs('j-strat'),
+    entry:gv('j-entry'),exit:gv('j-exit'),lot:gv('j-lot'),
+    notes,result:selRes,emotion:selEmo,
+    emoji:EMOJIS[selEmo]||'😐',rule,repeat,
+    aiAnalysis:'' // will be filled
   };
-  trades.unshift(trade); save();
-  // reset
-  ['j-asset','j-entry','j-exit','j-lot','j-notes'].forEach(id=>document.getElementById(id).value='');
+
+  // show AI box
+  const aiBox = document.getElementById('ai-analysis-box');
+  const aiText = document.getElementById('ai-analysis-text');
+  aiBox.style.display='block';
+  aiText.innerHTML='<div class="loading"><span></span><span></span><span></span></div> Analyzing your trade psychology...';
+
+  // Generate AI analysis
+  const analysis = await generateTradeAnalysis(trade);
+  trade.aiAnalysis = analysis;
+  aiText.innerHTML = analysis;
+
+  trades.unshift(trade);
+  saveState();
+
+  // reset form
+  ['j-asset','j-entry','j-exit','j-lot','j-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('j-rule').value='';
-  document.getElementById('img-preview').style.display='none';
-  document.getElementById('chart-file').value='';
-  selResult=''; selEmotion='';
-  document.querySelectorAll('.result-btn').forEach(b=>b.classList.remove('sel'));
-  document.querySelectorAll('.emotion-btn').forEach(b=>b.classList.remove('selected'));
-  if(repeat){
-    modal('⚠️','Repeat Mistake Detected!','You made this exact same mistake before! "'+rule+'" caused a loss on '+repeat.date+' ('+repeat.asset+'). ZenTrade has flagged this as a recurring pattern. Break this cycle — it is costing you real money.');
-  } else {
-    toast('✅','<strong>Trade saved!</strong> Keep journaling to build your pattern report.');
-    switchTab('hist');
+  document.getElementById('j-prev').style.display='none';
+  document.getElementById('j-file').value='';
+  selRes=''; selEmo='';
+  document.querySelectorAll('.res-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.emo-btn').forEach(b=>b.classList.remove('sel'));
+
+  toast('✅','<strong>Trade saved!</strong> AI analysis complete.');
+
+  if(repeat) {
+    setTimeout(()=>{
+      showModal('⚠️','Repeat Mistake Detected!','You made this exact same mistake before! "'+rule+'" caused a loss on '+repeat.date+' ('+repeat.asset+'). This is a recurring pattern costing you real money. ZenTrade has flagged this — break this cycle now.');
+    },1000);
   }
 }
-function renderEntries(){
+
+async function generateTradeAnalysis(trade) {
+  const prompt = `You are ZenTrade AI, a trading psychology and technical analysis expert. A trader just recorded this trade:
+
+Asset: ${trade.asset}
+Timeframe: ${trade.tf}
+Strategy: ${trade.strat}
+Entry: ${trade.entry||'Not specified'}
+Exit: ${trade.exit||'Not specified'}
+Position Size: ${trade.lot||'Not specified'}
+Result: ${trade.result.toUpperCase()}
+Emotion before trade: ${trade.emotion}
+Rule broken: ${trade.rule||'None'}
+Trader notes: ${trade.notes||'None provided'}
+
+Give a concise but powerful analysis in this exact format using HTML for formatting:
+
+<strong>📊 Technical Analysis:</strong><br/>
+[2-3 sentences about what likely happened technically based on the info provided]<br/><br/>
+
+<strong>🧠 Psychological Analysis:</strong><br/>
+[2-3 sentences about the psychological factors — emotion, rule break, mindset]<br/><br/>
+
+<strong>✅ What You Did Right:</strong><br/>
+[1-2 things done well even in a loss]<br/><br/>
+
+<strong>⚠️ What To Fix Next Time:</strong><br/>
+[2-3 specific, actionable improvements]<br/><br/>
+
+<strong>💡 ZenTrade Verdict:</strong><br/>
+[One powerful closing sentence that the trader will remember]
+
+Keep it honest, direct, and genuinely helpful. Maximum 200 words total.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data = await response.json();
+    if(data.content&&data.content[0]) return data.content[0].text;
+    return generateLocalAnalysis(trade);
+  } catch(e) {
+    return generateLocalAnalysis(trade);
+  }
+}
+
+function generateLocalAnalysis(trade) {
+  const emoAdvice = EMO_ADVICE[trade.emotion]||'Be mindful of your emotional state before every trade.';
+  const isLoss = trade.result==='loss';
+  return `<strong>📊 Technical Analysis:</strong><br/>
+${isLoss?`Your ${trade.strat} setup on ${trade.asset} (${trade.tf}) did not play out as expected. This could be due to market conditions, incorrect entry timing, or a misread of the setup. Always verify the higher timeframe bias before entering.`:`Your ${trade.strat} setup on ${trade.asset} (${trade.tf}) worked as planned. The market moved in your favor — now analyze exactly why so you can repeat it.`}<br/><br/>
+<strong>🧠 Psychological Analysis:</strong><br/>
+${trade.emotion==='calm'?'You were calm before this trade — good. Always aim to trade in this state.':emoAdvice} ${trade.rule?`Breaking the rule "${trade.rule}" directly contributed to ${isLoss?'this loss':'unnecessary risk in this trade'}. This must become non-negotiable.`:''}<br/><br/>
+<strong>✅ What You Did Right:</strong><br/>
+${isLoss?'You recorded this trade in your journal — most traders ignore losses and repeat them. You are already ahead by analyzing it.':'You followed through on your setup and it worked. Identify the exact conditions and replicate them.'}<br/><br/>
+<strong>⚠️ What To Fix Next Time:</strong><br/>
+${trade.rule?`1. Never break the rule "${trade.rule}" again — make it your first checklist item.<br/>2. Before entering, ask: "Would I take this trade if my last 3 trades all lost?" If no — don't enter.`:'1. Always define your entry, stop loss, and target BEFORE entering. 2. Check higher timeframe context. 3. Confirm your setup meets ALL criteria in your plan.'}<br/><br/>
+<strong>💡 ZenTrade Verdict:</strong><br/>
+${isLoss?'A loss recorded and analyzed is a lesson bought. A loss ignored is a mistake repeated.':'A win analyzed deeply is worth more than 10 wins ignored. Lock this memory in.'}`;
+}
+
+function renderEntries() {
   const list=document.getElementById('entries-list');
-  const cnt=document.getElementById('entry-count');
+  const cnt=document.getElementById('entry-cnt');
   cnt.textContent=trades.length+' trade'+(trades.length!==1?'s':'')+' recorded';
-  if(!trades.length){
-    list.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">No trades recorded yet</div><div class="empty-desc">Go to "Add Trade" tab and record your first trade to start building your psychological profile.</div></div>`;
+  if(!trades.length) {
+    list.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">No trades recorded yet</div><div class="empty-desc">Go to "Add Trade" and record your first trade to start building your psychological profile.</div></div>`;
     return;
   }
   list.innerHTML=trades.map(t=>`
     <div class="entry-card ${t.repeat?'repeat':''}">
-      <div class="entry-top">
+      <div class="et">
         <div>
-          <div class="entry-asset">${t.emoji} ${t.asset} <span style="color:var(--white-dim);font-weight:400;font-size:0.82rem;">— ${t.strat}</span></div>
-          <div class="entry-meta">${t.date} at ${t.time} · ${t.tf}</div>
+          <div class="ea">${t.emoji} ${t.asset} <span style="color:var(--dim);font-weight:400;font-size:0.78rem;">— ${t.strat}</span></div>
+          <div class="em">${t.date} at ${t.time} · ${t.tf}</div>
         </div>
-        <div class="entry-badges">
-          <span class="badge ${t.result==='win'?'badge-win':'badge-loss'}">${t.result==='win'?'🟢 WIN':'🔴 LOSS'}</span>
+        <div class="ebadge">
+          <span class="badge ${t.result==='win'?'bw':'bl2'}">${t.result==='win'?'🟢 WIN':'🔴 LOSS'}</span>
           <button class="del-btn" onclick="delTrade(${t.id})">Delete</button>
         </div>
       </div>
-      <div class="entry-info">
+      <div class="ei">
         ${t.entry?`<span><strong>Entry:</strong> ${t.entry}</span>`:''}
         ${t.exit?`<span><strong>Exit:</strong> ${t.exit}</span>`:''}
-        ${t.lot?`<span><strong>Lot:</strong> ${t.lot}</span>`:''}
-        <span><strong>Emotion:</strong> ${t.emotion}</span>
+        ${t.lot?`<span><strong>Size:</strong> ${t.lot}</span>`:''}
+        <span><strong>Emotion:</strong> ${t.emoji} ${t.emotion}</span>
         ${t.rule?`<span><strong>Rule Broken:</strong> ${t.rule}</span>`:''}
       </div>
-      ${t.notes?`<div class="entry-note">${t.notes}</div>`:''}
-      ${t.repeat?`<div class="repeat-warning"><span style="font-size:1.1rem;">⚠️</span><div class="repeat-warning-text"><strong>Repeat Mistake!</strong> You made this same mistake ("${t.rule}") on ${t.repeat.date} with ${t.repeat.asset}. This is a recurring pattern costing you money. Break this cycle.</div></div>`:''}
+      ${t.notes?`<div class="enote">"${t.notes}"</div>`:''}
+      ${t.aiAnalysis?`<div class="eai"><div class="eai-title">🤖 AI Analysis</div><div class="eai-text">${t.aiAnalysis}</div></div>`:''}
+      ${t.repeat?`<div class="rw"><span style="font-size:1rem;">⚠️</span><div class="rw-text"><strong>Repeat Mistake Detected!</strong> You made this same mistake ("${t.rule}") on ${t.repeat.date} with ${t.repeat.asset}. This is a recurring pattern. Break this cycle now — it is costing you real money every time.</div></div>`:''}
     </div>`).join('');
 }
-function delTrade(id){
-  trades=trades.filter(t=>t.id!==id); save(); renderEntries();
+
+function delTrade(id) {
+  trades=trades.filter(t=>t.id!==id); saveState(); renderEntries();
   toast('🗑️','Trade entry deleted.');
 }
 
-// ── MISTAKE MEMORY ──
-function renderMemory(){
-  const tot=trades.length, wins=trades.filter(t=>t.result==='win').length,
-        losses=trades.filter(t=>t.result==='loss').length,
-        breaks=trades.filter(t=>t.rule&&t.rule!=='').length;
-  document.getElementById('mm-total').textContent=tot;
-  document.getElementById('mm-wins').textContent=wins;
-  document.getElementById('mm-losses').textContent=losses;
-  document.getElementById('mm-breaks').textContent=breaks;
-
-  const ruleCount={}, emotionLoss={};
-  trades.forEach(t=>{
-    if(t.rule&&t.rule!=='') ruleCount[t.rule]=(ruleCount[t.rule]||0)+1;
-    if(t.result==='loss') emotionLoss[t.emotion]=(emotionLoss[t.emotion]||0)+1;
-  });
-
-  const container=document.getElementById('memory-content');
-  if(!tot){ container.innerHTML=`<div class="empty"><div class="empty-icon">🧠</div><div class="empty-title">No patterns yet</div><div class="empty-desc">Record at least 5 trades in your Journal to start seeing your psychological patterns here.</div></div>`; return; }
-
-  let html='';
-  const sortedRules=Object.entries(ruleCount).sort((a,b)=>b[1]-a[1]);
-  if(sortedRules.length){
-    html+=`<h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:16px;">🔴 Your Recurring Rule Breaks</h3>`;
-    sortedRules.slice(0,5).forEach(([rule,count],i)=>{
-      const pct=Math.round((count/tot)*100);
-      const sev=pct>40?'danger':'warning';
-      const timeline=trades.filter(t=>t.rule===rule).map(t=>`<div class="timeline-item"><div class="t-dot ${pct>40?'':'gold'}"></div><div class="t-text">Lost on <strong>${t.asset}</strong> — ${t.date} (${t.tf})</div></div>`).join('');
-      html+=`<div class="pattern-card ${sev}">
-        <div class="pattern-header">
-          <div class="pattern-icon-box ${sev}">${pct>40?'🔴':'⚠️'}</div>
-          <div><div class="pattern-name">${rule}</div><div class="pattern-count">Repeated ${count} time${count>1?'s':''} — ${pct}% of your trades</div></div>
-        </div>
-        <div class="prog-wrap"><div class="prog-bg"><div class="prog-fill ${pct>40?'red':'gold'}" style="width:${pct}%"></div></div><span class="prog-pct">${pct}%</span></div>
-        <div class="pattern-advice">💡 <strong>ZenTrade Advice:</strong> "${rule}" is your #${i+1} psychological leak. Every time you break this rule — you lose. Make it non-negotiable in your pre-trade checklist. Do not enter ANY trade until this rule is confirmed.</div>
-        <div class="timeline-title">When this happened</div>${timeline}
-      </div>`;
-    });
+// ═══════════════════════════════════════
+// ASK ZENTRADE
+// ═══════════════════════════════════════
+function renderAskPage() {
+  if(!session) {
+    document.getElementById('ask-locked').style.display='flex';
+    document.getElementById('ask-content').style.display='none';
+  } else {
+    document.getElementById('ask-locked').style.display='none';
+    document.getElementById('ask-content').style.display='block';
   }
-
-  const sortedEmotions=Object.entries(emotionLoss).sort((a,b)=>b[1]-a[1]);
-  if(sortedEmotions.length){
-    html+=`<h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin:30px 0 16px;">🧠 Emotions That Cause Your Losses</h3>`;
-    sortedEmotions.slice(0,3).forEach(([emotion,count])=>{
-      const pct=losses>0?Math.round((count/losses)*100):0;
-      html+=`<div class="pattern-card warning">
-        <div class="pattern-header">
-          <div class="pattern-icon-box warning">${EMOTIONS[emotion]||'😐'}</div>
-          <div><div class="pattern-name">You lose most when feeling: ${emotion.charAt(0).toUpperCase()+emotion.slice(1)}</div><div class="pattern-count">${count} of your losses happened in this emotional state</div></div>
-        </div>
-        <div class="prog-wrap"><div class="prog-bg"><div class="prog-fill gold" style="width:${pct}%"></div></div><span class="prog-pct">${pct}% of losses</span></div>
-        <div class="pattern-advice">💡 ${EMOTION_ADVICE[emotion]||'Be aware of this emotional state before entering any trade.'}</div>
-      </div>`;
-    });
-  }
-  if(!html) html=`<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">Keep recording trades!</div><div class="empty-desc">Record more trades with details to see your full psychological pattern analysis here.</div></div>`;
-  container.innerHTML=html;
 }
 
-// ── DASHBOARD ──
+function quickQ(q) {
+  document.getElementById('chat-in').value = q;
+  sendMsg();
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('chat-in');
+  const msg = inp.value.trim();
+  if(!msg) return;
+  inp.value='';
+  inp.style.height='auto';
+
+  // user bubble
+  addMsg('user', msg, 'You');
+  document.getElementById('chat-send-btn').disabled=true;
+
+  // bot typing
+  const botId='bot-'+Date.now();
+  addMsg('bot','<div class="loading"><span></span><span></span><span></span></div>','ZenTrade AI',botId);
+
+  chatHistory.push({role:'user',content:msg});
+
+  try {
+    const systemPrompt = `You are ZenTrade AI — a trading psychology coach and strategy expert built into the ZenTrade platform. 
+
+The trader's profile:
+- Name: ${session?.name||'Trader'}
+- Style: ${session?.style||'Unknown'}
+- Market: ${session?.market||'Unknown'}
+- Strategy: ${session?.strategy||'Unknown'}
+- Experience: ${session?.exp||'Unknown'}
+- Total trades recorded: ${trades.length}
+- Recent losses: ${trades.filter(t=>t.result==='loss').length}
+- Most common rule broken: ${getMostCommonRule()}
+
+Your role is to:
+1. Help traders understand their psychology — fear, greed, FOMO, revenge trading
+2. Give honest, direct trading advice — no sugarcoating
+3. Explain strategies like SMC, ICT, Price Action in simple terms
+4. Help with risk management, position sizing, emotional control
+5. Be like a strict but caring trading mentor
+
+Keep responses concise (under 150 words), practical, and direct. Use simple language. Format with line breaks for readability.`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:systemPrompt,
+        messages:chatHistory.slice(-10)
+      })
+    });
+    const data=await response.json();
+    const reply=data.content&&data.content[0]?data.content[0].text:getFallbackReply(msg);
+    chatHistory.push({role:'assistant',content:reply});
+    updateBotMsg(botId,reply);
+  } catch(e) {
+    const reply=getFallbackReply(msg);
+    chatHistory.push({role:'assistant',content:reply});
+    updateBotMsg(botId,reply);
+  }
+  document.getElementById('chat-send-btn').disabled=false;
+}
+
+function getMostCommonRule(){
+  const rc={};
+  trades.forEach(t=>{if(t.rule&&t.rule!='')rc[t.rule]=(rc[t.rule]||0)+1;});
+  const sorted=Object.entries(rc).sort((a,b)=>b[1]-a[1]);
+  return sorted.length?sorted[0][0]:'None recorded yet';
+}
+
+function getFallbackReply(msg) {
+  const m=msg.toLowerCase();
+  if(m.includes('revenge')) return `Revenge trading is one of the most destructive habits in trading.\n\nIt happens when a loss triggers your ego — you want to "win back" what the market took. But the market doesn't owe you anything.\n\nThe fix:\n1. Set a daily loss limit and stop when hit\n2. Walk away for at least 30 minutes after a loss\n3. Ask: "Would I take this trade if I hadn't just lost?"\n\nThe market will always be there tomorrow. Your capital may not be.`;
+  if(m.includes('fomo')) return `FOMO — Fear Of Missing Out — makes you enter trades after the move has already happened.\n\nYou see a big green candle and think: "I must enter now or miss it!"\n\nBut you are usually entering at the worst point — right before a reversal.\n\nThe fix:\n1. Remind yourself: there is always another setup\n2. Only enter if your complete criteria are met\n3. If you missed it — mark it in your journal as a "watched trade" and study why it worked`;
+  if(m.includes('smc')||m.includes('smart money')) return `SMC (Smart Money Concepts) is about trading with institutional flow — the banks and big funds that actually move markets.\n\nKey concepts:\n• Order Blocks — where institutions entered big positions\n• Break of Structure — confirms trend direction change\n• Fair Value Gaps — imbalances price comes back to fill\n• Liquidity — areas where stop losses cluster\n\nThe core rule: trade FROM structure TO liquidity. Never against it.\n\nWhat specific part of SMC would you like me to explain?`;
+  if(m.includes('risk')||m.includes('position size')) return `Risk management is the only thing separating surviving traders from blown accounts.\n\nThe golden rules:\n1. Never risk more than 1-2% of your account per trade\n2. Always set stop loss BEFORE entering\n3. Risk/reward minimum of 1:2 — if you risk ₹100, target ₹200\n4. Calculate position size based on stop loss distance\n\nFormula: Position Size = (Account × Risk%) ÷ Stop Loss in pips/points\n\nWith 1% risk, even 10 consecutive losses only removes 10% of your account. Most traders lose because they risk 10-20% per trade.`;
+  return `That is a great question about trading psychology and strategy.\n\nAs your ZenTrade AI coach, I want to give you the most relevant answer. Could you give me a bit more detail?\n\nFor example:\n• Are you asking about a specific trade you just made?\n• Is this about controlling a specific emotion like fear or greed?\n• Is this about a specific strategy like SMC, ICT, or Price Action?\n\nThe more specific you are — the more precise and useful my answer will be for your situation.`;
+}
+
+function addMsg(type, html, sender, id='') {
+  const msgs=document.getElementById('chat-msgs');
+  const time=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement('div');
+  div.className='msg '+type;
+  if(id) div.id=id;
+  div.innerHTML=`<div class="msg-bubble">${html.replace(/\n/g,'<br/>')}</div><div class="msg-time">${sender} · ${time}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function updateBotMsg(id, text) {
+  const el=document.getElementById(id);
+  if(el) el.querySelector('.msg-bubble').innerHTML=text.replace(/\n/g,'<br/>');
+  document.getElementById('chat-msgs').scrollTop=99999;
+}
+
+// ═══════════════════════════════════════
+// MISTAKE MEMORY
+// ═══════════════════════════════════════
+function renderMemoryPage(){
+  if(!session){
+    document.getElementById('mem-locked').style.display='flex';
+    document.getElementById('mem-content').style.display='none';
+    return;
+  }
+  document.getElementById('mem-locked').style.display='none';
+  document.getElementById('mem-content').style.display='block';
+
+  const tot=trades.length,wins=trades.filter(t=>t.result==='win').length,
+        losses=trades.filter(t=>t.result==='loss').length,
+        brks=trades.filter(t=>t.rule&&t.rule!=='').length;
+  document.getElementById('mm-t').textContent=tot;
+  document.getElementById('mm-w').textContent=wins;
+  document.getElementById('mm-l').textContent=losses;
+  document.getElementById('mm-b').textContent=brks;
+
+  const rc={},el={};
+  trades.forEach(t=>{
+    if(t.rule&&t.rule!=='') rc[t.rule]=(rc[t.rule]||0)+1;
+    if(t.result==='loss') el[t.emotion]=(el[t.emotion]||0)+1;
+  });
+
+  const cont=document.getElementById('mem-patterns');
+  if(!tot){cont.innerHTML=`<div class="empty"><div class="empty-icon">🧠</div><div class="empty-title">No patterns yet</div><div class="empty-desc">Record at least 5 trades in your Journal to start seeing your psychological patterns and recurring mistakes here.</div></div>`;return;}
+
+  let html='';
+  const sr=Object.entries(rc).sort((a,b)=>b[1]-a[1]);
+  if(sr.length){
+    html+=`<h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:14px;">🔴 Your Recurring Rule Breaks</h3>`;
+    sr.slice(0,5).forEach(([rule,cnt],i)=>{
+      const pct=Math.round((cnt/tot)*100);
+      const sev=pct>40?'danger':'warn';
+      const tl=trades.filter(t=>t.rule===rule).map(t=>`<div class="tl-item"><div class="td ${pct>40?'':'o'}"></div><div class="tt">Lost on <strong>${t.asset}</strong> — ${t.date} (${t.tf})</div></div>`).join('');
+      html+=`<div class="pc ${sev}">
+        <div class="ph"><div class="pi ${sev}">${pct>40?'🔴':'⚠️'}</div>
+        <div><div class="pn">${rule}</div><div class="pc2">Repeated ${cnt} time${cnt>1?'s':''} · ${pct}% of all trades</div></div></div>
+        <div class="pb"><div class="pb-bg"><div class="pb-fill ${pct>40?'r':'o'}" style="width:${pct}%"></div></div><span class="pb-pct">${pct}%</span></div>
+        <div class="pa">💡 <strong>ZenTrade Advice:</strong> "${rule}" is your #${i+1} psychological leak. Every time you break this rule you pay for it. Add it as the FIRST item in your pre-trade checklist. Do not click buy or sell until this is confirmed.</div>
+        <div class="tl-title">When this happened</div>${tl}</div>`;
+    });
+  }
+
+  const se=Object.entries(el).sort((a,b)=>b[1]-a[1]);
+  if(se.length){
+    html+=`<h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin:28px 0 14px;">🧠 Emotions That Cause Your Losses</h3>`;
+    se.slice(0,3).forEach(([emo,cnt])=>{
+      const pct=losses>0?Math.round((cnt/losses)*100):0;
+      html+=`<div class="pc warn">
+        <div class="ph"><div class="pi warn">${EMOJIS[emo]||'😐'}</div>
+        <div><div class="pn">You lose most when feeling: ${emo.charAt(0).toUpperCase()+emo.slice(1)}</div><div class="pc2">${cnt} of your losses happened in this emotional state</div></div></div>
+        <div class="pb"><div class="pb-bg"><div class="pb-fill o" style="width:${pct}%"></div></div><span class="pb-pct">${pct}% of losses</span></div>
+        <div class="pa">💡 ${EMO_ADVICE[emo]||'Be aware of this emotional state before every trade entry.'}</div></div>`;
+    });
+  }
+
+  if(!html) html=`<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">Keep recording trades!</div><div class="empty-desc">Record more trades with complete details to unlock your full psychological pattern analysis here.</div></div>`;
+  cont.innerHTML=html;
+}
+
+// ═══════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════
 function renderDashboard(){
-  const tot=trades.length, wins=trades.filter(t=>t.result==='win').length,
-        breaks=trades.filter(t=>t.rule&&t.rule!=='').length;
+  if(!session){
+    document.getElementById('dash-locked').style.display='flex';
+    document.getElementById('dash-content').style.display='none';
+    return;
+  }
+  document.getElementById('dash-locked').style.display='none';
+  document.getElementById('dash-content').style.display='block';
+
+  const tot=trades.length,wins=trades.filter(t=>t.result==='win').length,
+        brks=trades.filter(t=>t.rule&&t.rule!=='').length;
   const wr=tot>0?Math.round((wins/tot)*100):0;
-  const br=tot>0?Math.round((breaks/tot)*100):0;
-  const ds=Math.max(0,100-br-(wins<tot-wins?10:0));
-  document.getElementById('d-total').textContent=tot;
+  const br=tot>0?Math.round((brks/tot)*100):0;
+  const ds=Math.max(0,100-br-(wins<tot-wins?8:0));
+
+  document.getElementById('d-name').textContent=session.name.split(' ')[0];
+  document.getElementById('d-sub').textContent='Here is your complete trading psychology profile, '+session.name.split(' ')[0]+'.';
+  document.getElementById('d-tot').textContent=tot;
   document.getElementById('d-wr').textContent=wr+'%';
   document.getElementById('d-br').textContent=br+'%';
   document.getElementById('d-ds').textContent=tot>0?ds+'/100':'—';
 
-  // recent
   const rec=document.getElementById('d-recent');
   rec.innerHTML=trades.length?trades.slice(0,5).map(t=>`
-    <div class="recent-trade">
-      <div><div class="rt-asset">${t.emoji} ${t.asset}</div><div class="rt-detail">${t.strat} · ${t.tf} · ${t.date}</div></div>
-      <div class="rt-result ${t.result}">${t.result==='win'?'WIN':'LOSS'}</div>
+    <div class="rt">
+      <div><div class="rta">${t.emoji} ${t.asset}</div><div class="rtd">${t.strat} · ${t.tf} · ${t.date}</div></div>
+      <div class="rtr ${t.result==='win'?'w':'l'}">${t.result==='win'?'WIN':'LOSS'}</div>
     </div>`).join(''):
-    `<div class="empty" style="padding:24px 0"><div class="empty-desc">No trades yet. Start journaling!</div></div>`;
+    `<div class="empty" style="padding:24px 0;"><div class="empty-desc">No trades yet. Start journaling!</div></div>`;
 
-  // leaks
   const rc={};
-  trades.forEach(t=>{if(t.rule&&t.rule!='') rc[t.rule]=(rc[t.rule]||0)+1;});
+  trades.forEach(t=>{if(t.rule&&t.rule!='')rc[t.rule]=(rc[t.rule]||0)+1;});
   const sl=Object.entries(rc).sort((a,b)=>b[1]-a[1]);
   const leaks=document.getElementById('d-leaks');
   leaks.innerHTML=sl.length?sl.slice(0,5).map(([rule,cnt],i)=>`
-    <div class="leak-item">
-      <div class="leak-rank">#${i+1}</div>
-      <div class="leak-bar-wrap"><div class="leak-name">${rule}</div><div class="leak-bar-bg"><div class="leak-bar-fill" style="width:${Math.round((cnt/sl[0][1])*100)}%"></div></div></div>
-      <div class="leak-count">${cnt}x</div>
+    <div class="li">
+      <div class="lrk">#${i+1}</div>
+      <div class="lbw"><div class="ln">${rule}</div><div class="lbb"><div class="lbf" style="width:${Math.round((cnt/sl[0][1])*100)}%"></div></div></div>
+      <div class="lc">${cnt}x</div>
     </div>`).join(''):
-    `<div class="empty" style="padding:24px 0"><div class="empty-desc">No leaks detected yet.</div></div>`;
+    `<div class="empty" style="padding:20px 0;"><div class="empty-desc">No leaks detected yet. Keep journaling!</div></div>`;
 
-  // profile
-  if(user){
-    document.getElementById('d-name').textContent=user.name.split(' ')[0];
-    document.getElementById('d-avatar').textContent=user.name.charAt(0).toUpperCase();
-    document.getElementById('d-pname').textContent=user.name;
-    document.getElementById('d-psub').textContent=user.exp+' · Joined '+user.joined;
-    document.getElementById('d-pdetails').innerHTML=`
-      <div><div class="p-item-lbl">Email</div><div class="p-item-val">${user.email}</div></div>
-      <div><div class="p-item-lbl">Mobile</div><div class="p-item-val">${user.mobile}</div></div>
-      <div><div class="p-item-lbl">Platform</div><div class="p-item-val">${user.platform}</div></div>
-      <div><div class="p-item-lbl">Market</div><div class="p-item-val">${user.market}</div></div>
-      <div><div class="p-item-lbl">Style</div><div class="p-item-val">${user.style}</div></div>
-      <div><div class="p-item-lbl">Strategy</div><div class="p-item-val">${user.strategy}</div></div>`;
-  }
+  document.getElementById('d-av').textContent=session.name.charAt(0).toUpperCase();
+  document.getElementById('d-pnm').textContent=session.name;
+  document.getElementById('d-psb').textContent=session.exp+' · Joined '+session.joined;
+  document.getElementById('d-pdg').innerHTML=`
+    <div><div class="pil">Email</div><div class="piv">${session.email}</div></div>
+    <div><div class="pil">Mobile</div><div class="piv">${session.mobile}</div></div>
+    <div><div class="pil">Platform</div><div class="piv">${session.platform}</div></div>
+    <div><div class="pil">Market</div><div class="piv">${session.market}</div></div>
+    <div><div class="pil">Style</div><div class="piv">${session.style}</div></div>
+    <div><div class="pil">Strategy</div><div class="piv">${session.strategy}</div></div>`;
 }
 
-// ── DELETE ACCOUNT ──
+// ═══════════════════════════════════════
+// DELETE ACCOUNT
+// ═══════════════════════════════════════
 function confirmDelete(){
-  modal('⚠️','Delete Account?','Your account and all trade data will be scheduled for permanent deletion. You have 3 months to recover it. After 3 months — everything is gone forever with no possibility of recovery.');
-  document.getElementById('m-btn').textContent='Yes, Delete My Account';
+  showModal('⚠️','Delete Account?','Your account and ALL trade data will be scheduled for permanent deletion. After 3 months from today — everything is gone forever with no possibility of recovery. Are you absolutely sure?');
+  document.getElementById('m-btn').textContent='Yes — Delete My Account';
   document.getElementById('m-btn').onclick=()=>{
-    logout(); document.getElementById('modal-ov').classList.remove('show');
-    toast('🗑️','Account deletion scheduled. All data removed in 3 months.');
+    localStorage.removeItem('zt_user_'+session.email);
+    localStorage.removeItem('zt_trades_'+session.email);
+    logout();
+    document.getElementById('modal').classList.remove('show');
+    toast('🗑️','Account deleted. All data will be permanently removed within 3 months.');
   };
 }
 
-// ── UTILS ──
-function v(id){ return document.getElementById(id)?.value?.trim()||''; }
-function sv(id){ const el=document.getElementById(id); return el?el.value:''; }
-function toast(icon, msg){
+// ═══════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════
+function gv(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function gs(id){const el=document.getElementById(id);return el?el.value:'';}
+
+function toast(icon,msg,dur=3500){
   const t=document.getElementById('toast');
-  document.getElementById('toast-icon').textContent=icon;
-  document.getElementById('toast-msg').innerHTML=msg;
+  document.getElementById('t-icon').textContent=icon;
+  document.getElementById('t-msg').innerHTML=msg;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
+  setTimeout(()=>t.classList.remove('show'),dur);
 }
-function modal(icon, title, msg){
-  document.getElementById('m-icon').textContent=icon;
-  document.getElementById('m-title').textContent=title;
+
+function showModal(icon,title,msg){
+  document.getElementById('m-ico').textContent=icon;
+  document.getElementById('m-ttl').textContent=title;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('m-btn').textContent='Got it!';
-  document.getElementById('m-btn').onclick=()=>document.getElementById('modal-ov').classList.remove('show');
-  document.getElementById('modal-ov').classList.add('show');
+  document.getElementById('m-btn').onclick=()=>document.getElementById('modal').classList.remove('show');
+  document.getElementById('modal').classList.add('show');
 }
-function closeModal(e){ if(e.target===document.getElementById('modal-ov')) document.getElementById('modal-ov').classList.remove('show'); }
+
+function closeModal(e){if(e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('show');}
+
+// auto resize chat input
+document.addEventListener('DOMContentLoaded',()=>{
+  const ci=document.getElementById('chat-in');
+  if(ci) ci.addEventListener('input',()=>{ci.style.height='auto';ci.style.height=Math.min(ci.scrollHeight,100)+'px';});
+});
 </script>
 </body>
 </html>
