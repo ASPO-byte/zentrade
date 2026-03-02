@@ -306,6 +306,48 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
 .md-msg{font-size:0.85rem;color:var(--dim);text-align:center;line-height:1.65;margin-bottom:24px;}
 .md-btn{width:100%;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;}
 
+/* ── FREEMIUM ── */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;}
+.plan-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:28px;position:relative;transition:transform 0.3s,border-color 0.3s;}
+.plan-card:hover{transform:translateY(-5px);}
+.plan-card.popular{border-color:var(--teal);background:rgba(31,196,176,0.07);}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;font-size:0.72rem;font-weight:700;padding:4px 16px;border-radius:100px;white-space:nowrap;letter-spacing:0.05em;}
+.plan-name{font-size:0.8rem;font-weight:700;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.plan-price{font-family:'DM Mono',monospace;font-size:2.4rem;font-weight:500;margin-bottom:4px;line-height:1;}
+.plan-price span{font-size:1rem;color:var(--dim);}
+.plan-price-sub{font-size:0.75rem;color:var(--faint);margin-bottom:20px;}
+.plan-divider{height:1px;background:var(--gb);margin:18px 0;}
+.plan-features{list-style:none;margin-bottom:24px;}
+.plan-features li{font-size:0.83rem;color:var(--dim);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:10px;}
+.plan-features li:last-child{border-bottom:none;}
+.plan-features li .chk{font-size:0.9rem;}
+.plan-features li.no{color:var(--faint);}
+.plan-btn{width:100%;padding:13px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:none;}
+.plan-btn-free{background:rgba(255,255,255,0.07);color:var(--white);}
+.plan-btn-free:hover{background:rgba(255,255,255,0.12);}
+.plan-btn-pro{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;box-shadow:0 4px 20px rgba(58,143,232,0.3);}
+.plan-btn-pro:hover{opacity:0.9;transform:translateY(-1px);}
+.faq-item{background:var(--glass);border:1px solid var(--gb);border-radius:13px;padding:20px;margin-bottom:12px;cursor:pointer;}
+.faq-q{font-size:0.9rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+.faq-a{font-size:0.83rem;color:var(--dim);line-height:1.7;margin-top:12px;display:none;}
+.faq-a.open{display:block;}
+
+/* AD BANNER */
+.ad-banner{background:rgba(255,255,255,0.03);border:1px dashed var(--border);border-radius:10px;padding:12px 16px;text-align:center;font-size:0.75rem;color:var(--faint);margin:16px 0;}
+.ad-banner strong{color:var(--dim);}
+
+/* UPGRADE PROMPT */
+.upgrade-prompt{background:rgba(31,196,176,0.06);border:1px solid rgba(31,196,176,0.25);border-radius:14px;padding:20px;text-align:center;margin-bottom:20px;}
+.upgrade-prompt h3{font-size:1rem;font-weight:600;margin-bottom:6px;}
+.upgrade-prompt p{font-size:0.82rem;color:var(--dim);margin-bottom:14px;line-height:1.6;}
+.trade-counter{display:flex;align-items:center;justify-content:space-between;background:var(--glass);border:1px solid var(--gb);border-radius:11px;padding:14px 18px;margin-bottom:16px;}
+.tc-left{font-size:0.85rem;font-weight:500;}
+.tc-bar-wrap{flex:1;margin:0 16px;}
+.tc-bar-bg{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.tc-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green),var(--teal));transition:width 0.5s ease;}
+.tc-bar-fill.warning{background:linear-gradient(90deg,var(--gold),var(--red));}
+.tc-right{font-size:0.82rem;font-family:'DM Mono',monospace;color:var(--dim);}
+
 /* LOADING */
 .loading{display:inline-flex;gap:4px;align-items:center;}
 .loading span{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:ld 1.2s ease-in-out infinite;}
@@ -348,6 +390,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
     <li><a id="n-journal" class="locked" onclick="requireAuth('journal')">Journal</a></li>
     <li><a id="n-ask" class="locked" onclick="requireAuth('ask')">Ask ZenTrade</a></li>
     <li><a id="n-memory" class="locked" onclick="requireAuth('memory')">Mistake Memory</a></li>
+    <li><a id="n-learn" onclick="go('learn')">📚 Learning</a></li>
+    <li><a id="n-pricing" onclick="go('pricing')">⭐ Pricing</a></li>
     <li><a id="n-dashboard" class="locked" onclick="requireAuth('dashboard')">Dashboard</a></li>
   </ul>
   <div class="nav-right">
@@ -429,7 +473,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
         </div>
         <div class="frow">
           <div class="fg"><label class="flabel">Mobile Number *</label><input class="finput" id="r-mobile" placeholder="+91 98765 43210" type="tel"/></div>
-          <div class="fg"><label class="flabel">Password *</label><input class="finput" id="r-pass" placeholder="Create a password" type="password"/></div>
+          <div class="fg"><label class="flabel">Password *</label><input class="finput" id="r-pass" placeholder="Create a password (min 4 chars)" type="password"/></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label class="flabel">Security Question *</label>
+            <select class="fselect" id="r-sq">
+              <option value="">Select a question</option>
+              <option>What was the first asset you ever traded?</option>
+              <option>What was your first trading loss amount?</option>
+              <option>What is your mother first name?</option>
+              <option>What city were you born in?</option>
+              <option>What is your childhood nickname?</option>
+            </select>
+          </div>
+          <div class="fg"><label class="flabel">Your Answer *</label><input class="finput" id="r-sa" placeholder="Remember this answer!" type="text"/></div>
         </div>
         <div class="fdiv"></div>
         <div class="frow">
@@ -497,7 +554,32 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
         <div class="fg"><label class="flabel">Email Address *</label><input class="finput" id="l-email" placeholder="your@email.com" type="email"/></div>
         <div class="fg"><label class="flabel">Password *</label><input class="finput" id="l-pass" placeholder="Your password" type="password" onkeydown="if(event.key==='Enter')login()"/></div>
         <button class="btn btn-primary btn-full" onclick="login()">🔐 Login to ZenTrade</button>
+        <div style="text-align:center;margin-top:14px;"><a onclick="go('forgot')" style="font-size:0.8rem;color:var(--teal);cursor:pointer;">Forgot your password? Recover here</a></div>
         <div class="auth-switch">New to ZenTrade? <a onclick="go('register')">Create free account</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORGOT PASSWORD PAGE ══ -->
+<div class="page" id="page-forgot">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo"><div class="logo"><div class="logo-icon">🧘</div>Zen<span>Trade</span></div></div>
+      <div class="auth-card">
+        <div class="auth-title">Recover Password 🔑</div>
+        <div class="auth-sub">Enter your email and answer your security question to reset your password</div>
+        <div class="fg"><label class="flabel">Email Address *</label><input class="finput" id="f-email" placeholder="your@email.com" type="email"/></div>
+        <div class="fg" id="f-q-box" style="display:none">
+          <label class="flabel" id="f-q-label">Security Question</label>
+          <input class="finput" id="f-answer" placeholder="Your security answer"/>
+        </div>
+        <div class="fg" id="f-newpass-box" style="display:none">
+          <label class="flabel">New Password *</label>
+          <input class="finput" id="f-newpass" placeholder="Enter new password" type="password"/>
+        </div>
+        <button class="btn btn-primary btn-full" id="f-btn" onclick="forgotStep()">Find My Account</button>
+        <div class="auth-switch"><a onclick="go('login')" style="cursor:pointer">← Back to Login</a></div>
       </div>
     </div>
   </div>
@@ -583,6 +665,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
               <option>Chased price</option><option>Traded during news</option>
               <option>Traded while emotional</option>
             </select>
+          </div>
+          <!-- TRADE COUNTER -->
+          <div class="trade-counter" id="trade-counter-box">
+            <div class="tc-left" id="tc-label">Trades this month</div>
+            <div class="tc-bar-wrap">
+              <div class="tc-bar-bg"><div class="tc-bar-fill" id="tc-bar" style="width:0%"></div></div>
+            </div>
+            <div class="tc-right" id="tc-count">0 / 5</div>
+          </div>
+          <!-- AD BANNER for free users -->
+          <div class="ad-banner" id="ad-banner-journal" style="display:none;">
+            <strong>📢 Advertisement</strong> — Upgrade to Pro to remove ads<br/>
+            <span style="color:var(--blue);cursor:pointer;font-size:0.8rem;" onclick="go('pricing')">Open a Zerodha account → Best broker for Indian traders. Zero brokerage on delivery. →</span>
           </div>
           <button class="btn btn-primary btn-full" id="save-btn" onclick="saveTrade()">💾 Save Trade & Get AI Analysis</button>
 
@@ -690,10 +785,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
   </div>
   <div id="dash-content" style="display:none;">
     <div class="wrap">
-      <div style="margin-bottom:28px;">
-        <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">Good day, <span id="d-name" style="color:var(--teal)">Trader</span> 👋</h2>
-        <p style="color:var(--dim);font-size:0.85rem;margin-top:4px;" id="d-sub">Here is your complete trading psychology profile.</p>
+      <div style="margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">Good day, <span id="d-name" style="color:var(--teal)">Trader</span> 👋</h2>
+          <p style="color:var(--dim);font-size:0.85rem;margin-top:4px;" id="d-sub">Here is your complete trading psychology profile.</p>
+        </div>
+        <div id="plan-badge-box"></div>
       </div>
+      <div id="dash-upgrade-prompt"></div>
       <div class="dg4">
         <div class="ds"><div class="dsl">Total Trades</div><div class="dsv b" id="d-tot">0</div><div class="dss">All time</div></div>
         <div class="ds"><div class="dsl">Win Rate</div><div class="dsv g" id="d-wr">0%</div><div class="dss">Based on journal</div></div>
@@ -718,6 +817,232 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 3
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+
+<!-- ══ PRICING PAGE ══ -->
+<div class="page" id="page-pricing">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag">Simple & Honest Pricing</div>
+      <h2 class="h2">Choose Your <em>Plan</em></h2>
+      <p class="sub" style="text-align:center;margin:0 auto 16px;">Start free. Upgrade only when you are ready. No hidden charges. Cancel anytime.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(31,214,122,0.1);border:1px solid rgba(31,214,122,0.25);padding:7px 18px;border-radius:100px;font-size:0.8rem;color:var(--green);font-weight:600;">✅ No credit card required to start free</div>
+    </div>
+
+    <!-- PLANS -->
+    <div class="plan-grid">
+
+      <!-- FREE -->
+      <div class="plan-card">
+        <div class="plan-name">Free Forever</div>
+        <div class="plan-price">₹0 <span style="font-size:0.9rem;">/ $0</span></div>
+        <div class="plan-price-sub">No credit card. No expiry.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk">✅</span> Register & Login</li>
+          <li><span class="chk">✅</span> 5 trades per month in Journal</li>
+          <li><span class="chk">✅</span> Basic Mistake Memory (last 5 trades)</li>
+          <li><span class="chk">✅</span> Basic Dashboard & Stats</li>
+          <li><span class="chk">✅</span> Learning Section (free content)</li>
+          <li><span class="chk">✅</span> Ask ZenTrade (3 questions/month)</li>
+          <li class="no"><span class="chk">❌</span> AI Trade Analysis</li>
+          <li class="no"><span class="chk">❌</span> Full Mistake Memory History</li>
+          <li class="no"><span class="chk">❌</span> Weekly Mind Report</li>
+          <li class="no"><span class="chk">❌</span> Premium PDF Resources</li>
+          <li class="no"><span class="chk">🖼️</span> Ads shown inside tool</li>
+        </ul>
+        <button class="plan-btn plan-btn-free" onclick="go('register')">Start Free Now</button>
+      </div>
+
+      <!-- PRO INDIA -->
+      <div class="plan-card popular">
+        <div class="plan-badge">⭐ MOST POPULAR — INDIA</div>
+        <div class="plan-name" style="color:var(--teal);">Pro — India</div>
+        <div style="margin-bottom:4px;">
+          <span style="font-size:1rem;color:var(--faint);text-decoration:line-through;font-family:'DM Mono',monospace;">₹699/month</span>
+          <span style="font-size:0.72rem;font-weight:700;background:var(--red);color:#fff;padding:2px 8px;border-radius:100px;margin-left:8px;">71% OFF</span>
+        </div>
+        <div class="plan-price" style="color:var(--teal);">₹199<span>/month</span></div>
+        <div class="plan-price-sub" style="color:var(--teal);font-weight:600;">🔥 Limited Launch Offer — or ₹1,499/year</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk">✅</span> Everything in Free</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Unlimited</strong> trades in Journal</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Full AI Trade Analysis</strong> every trade</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Unlimited</strong> Ask ZenTrade AI</li>
+          <li><span class="chk">✅</span> Full Mistake Memory — all history</li>
+          <li><span class="chk">✅</span> Complete Psychology Dashboard</li>
+          <li><span class="chk">✅</span> Weekly Mind Report</li>
+          <li><span class="chk">✅</span> All Premium PDF Resources</li>
+          <li><span class="chk">✅</span> Priority Support</li>
+          <li><span class="chk">🚫</span> <strong style="color:var(--white)">Zero ads</strong> — clean experience</li>
+        </ul>
+        <button class="plan-btn plan-btn-pro" onclick="showUpgradeModal('india')">Upgrade to Pro — ₹199/month 🔥</button>
+        <div style="text-align:center;margin-top:10px;font-size:0.72rem;color:var(--faint);">Less than ₹7/day • Cancel anytime</div>
+      </div>
+
+      <!-- PRO GLOBAL -->
+      <div class="plan-card">
+        <div class="plan-badge" style="background:linear-gradient(135deg,var(--gold),#e8b84c);display:none;">🌍 GLOBAL</div>
+        <div class="plan-name">Pro — Global</div>
+        <div style="margin-bottom:4px;">
+          <span style="font-size:1rem;color:var(--faint);text-decoration:line-through;font-family:'DM Mono',monospace;">$29.9/month</span>
+          <span style="font-size:0.72rem;font-weight:700;background:var(--red);color:#fff;padding:2px 8px;border-radius:100px;margin-left:8px;">66% OFF</span>
+        </div>
+        <div class="plan-price">$9.99<span>/month</span></div>
+        <div class="plan-price-sub" style="color:var(--gold);font-weight:600;">🔥 Limited Launch Offer — or $69/year</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk">✅</span> Everything in Free</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Unlimited</strong> trades in Journal</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Full AI Trade Analysis</strong> every trade</li>
+          <li><span class="chk">✅</span> <strong style="color:var(--white)">Unlimited</strong> Ask ZenTrade AI</li>
+          <li><span class="chk">✅</span> Full Mistake Memory — all history</li>
+          <li><span class="chk">✅</span> Complete Psychology Dashboard</li>
+          <li><span class="chk">✅</span> Weekly Mind Report</li>
+          <li><span class="chk">✅</span> All Premium PDF Resources</li>
+          <li><span class="chk">✅</span> Priority Support</li>
+          <li><span class="chk">🚫</span> <strong style="color:var(--white)">Zero ads</strong> — clean experience</li>
+        </ul>
+        <button class="plan-btn plan-btn-pro" style="background:linear-gradient(135deg,var(--gold),#e8a020);" onclick="showUpgradeModal('global')">Upgrade to Pro — $9.99/month</button>
+        <div style="text-align:center;margin-top:10px;font-size:0.72rem;color:var(--faint);">Less than $0.30/day • Cancel anytime</div>
+      </div>
+
+    </div>
+
+    <!-- VALUE COMPARISON -->
+    <div style="background:rgba(232,64,64,0.05);border:1px solid rgba(232,64,64,0.2);border-radius:16px;padding:28px;margin-bottom:32px;text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:10px;">💡</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:8px;">Think About This</div>
+      <div style="font-size:0.88rem;color:var(--dim);line-height:1.8;max-width:600px;margin:0 auto;">One bad trade caused by poor psychology costs you <strong style="color:var(--red)">₹500 to ₹50,000.</strong> ZenTrade Pro costs <strong style="color:var(--teal)"><del style="color:var(--faint);">₹699</del> ₹199/month.</strong> If ZenTrade prevents even ONE bad trade per month — it has paid for itself <strong style="color:var(--white)">10 to 250 times over.</strong> The question is not whether you can afford Pro. The question is whether you can afford NOT to have it.</div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-bottom:40px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:20px;text-align:center;">Frequently Asked Questions</h3>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I really use it free forever? <span>+</span></div>
+        <div class="faq-a">Yes — completely. The free plan never expires and never requires a credit card. You get 5 trades per month, basic mistake memory, basic dashboard, and 3 AI questions per month. You can use ZenTrade free for as long as you want.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How do I pay for Pro? <span>+</span></div>
+        <div class="faq-a">Payment system is currently being set up. When it is ready you will be able to pay via UPI, Debit/Credit Card, Net Banking (for India) or PayPal/Card (for Global). We will notify all registered users when payments go live.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I cancel anytime? <span>+</span></div>
+        <div class="faq-a">Yes — absolutely. No lock-in periods. No cancellation fees. If you cancel, you keep Pro access until the end of your paid period. After that you automatically move to the free plan and your data is kept safely.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is my trading data safe and private? <span>+</span></div>
+        <div class="faq-a">Yes — 100%. Your trade journal, psychology data, and personal information is private to you only. We never sell, share, or analyse your personal data. You can delete your entire account and all data anytime — permanently removed within 3 months.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Why are there ads on the free plan? <span>+</span></div>
+        <div class="faq-a">Ads on the free plan help us keep ZenTrade free for everyone and cover our server and AI costs. Pro users get a completely ad-free experience. The ads are relevant to trading and finance — not random or intrusive.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What happens to my data if I upgrade or downgrade? <span>+</span></div>
+        <div class="faq-a">Nothing changes — all your trade history, journal entries, mistake memory, and profile data is always preserved regardless of your plan. Upgrading unlocks more features. Downgrading keeps your data but limits new entries to the free plan limits.</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ LEARNING SECTION PAGE ══ -->
+<div class="page" id="page-learn">
+  <div class="wrap">
+    <div class="tag">Free Learning Resources</div>
+    <h2 class="h2">Learning <em>Centre</em></h2>
+    <p class="sub">Free trading books, strategy guides, chart patterns, and psychology notes — handpicked for serious traders. New content added regularly.</p>
+
+    <!-- COMING SOON BANNER -->
+    <div style="background:rgba(31,196,176,0.07);border:1px solid rgba(31,196,176,0.25);border-radius:16px;padding:28px;text-align:center;margin-bottom:36px;">
+      <div style="font-size:2.5rem;margin-bottom:12px;">📚</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:8px;">Content Being Added Soon!</div>
+      <div style="font-size:0.88rem;color:var(--dim);line-height:1.7;max-width:480px;margin:0 auto;">Free PDF books, trading notes, chart patterns, and strategy guides will be available here. Check back soon — new resources are being added regularly.</div>
+    </div>
+
+    <!-- CATEGORIES GRID -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px;">
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">📖</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Trading Books</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Classic and modern books on trading psychology, risk management, and market analysis.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">📊</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Chart Patterns</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Visual guides to chart patterns — head and shoulders, triangles, flags, wedges and more.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">🎯</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Strategy Guides</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Step-by-step PDF guides for SMC, ICT, Price Action, EMA, RSI, MACD and more strategies.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">🧠</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Psychology Notes</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Deep notes on trading psychology — controlling emotions, building discipline, and mental resilience.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">💰</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Risk Management</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Guides on position sizing, stop loss placement, risk-reward ratios, and capital protection.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+      <div class="card" style="text-align:center;opacity:0.6;">
+        <div style="font-size:2.2rem;margin-bottom:12px;">📰</div>
+        <div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">Market Notes</div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-bottom:14px;">Weekly market observations, key levels, and educational breakdowns of recent market moves.</div>
+        <div style="font-size:0.75rem;font-weight:600;color:var(--teal);background:rgba(31,196,176,0.1);border:1px solid rgba(31,196,176,0.2);padding:5px 14px;border-radius:100px;display:inline-block;">Coming Soon</div>
+      </div>
+
+    </div>
+
+    <!-- WHY LEARNING MATTERS -->
+    <div style="background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:32px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:20px;">📌 Why Continuous Learning Matters in Trading</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div style="font-size:0.9rem;font-weight:600;color:var(--teal);margin-bottom:8px;">Most traders lose because they stop learning</div>
+          <div style="font-size:0.83rem;color:var(--dim);line-height:1.7;">The market is constantly evolving. A strategy that worked 2 years ago may not work the same way today. Traders who read, study, and continuously refine their knowledge have a permanent edge over those who rely only on experience.</div>
+        </div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:600;color:var(--teal);margin-bottom:8px;">Psychology is 90% of long-term success</div>
+          <div style="font-size:0.83rem;color:var(--dim);line-height:1.7;">Technical knowledge brings you to the door — psychology keeps you in the game. The books and notes in this section focus heavily on the mental side of trading because that is where most traders fail after learning the technical side.</div>
+        </div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:600;color:var(--teal);margin-bottom:8px;">Free knowledge is a competitive advantage</div>
+          <div style="font-size:0.83rem;color:var(--dim);line-height:1.7;">Most retail traders never read a single trading book. By reading even 3-4 quality books, you immediately move into the top 10% of retail traders in terms of knowledge. The traders at the top of any market are the most educated ones.</div>
+        </div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:600;color:var(--teal);margin-bottom:8px;">Combine learning with your journal</div>
+          <div style="font-size:0.83rem;color:var(--dim);line-height:1.7;">The best way to use this Learning Centre is alongside your ZenTrade Journal. When you read something that applies to a past trade — go back and add it to your trade notes. This creates a powerful feedback loop between learning and real experience.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -834,8 +1159,10 @@ function updateNav() {
 function register() {
   const name=gv('r-name'),email=gv('r-email'),mobile=gv('r-mobile'),pass=gv('r-pass');
   const platform=gs('r-platform'),market=gs('r-market'),style=gs('r-style'),exp=gs('r-exp');
+  const sq=gs('r-sq'),sa=gv('r-sa');
   if(!name||!email||!mobile||!pass) { toast('⚠️','Please fill all required fields!'); return; }
   if(!platform||!market||!style||!exp) { toast('⚠️','Please fill all trading profile fields!'); return; }
+  if(!sq||!sa) { toast('⚠️','Please select a security question and provide your answer!'); return; }
   if(pass.length < 4) { toast('⚠️','Password must be at least 4 characters!'); return; }
 
   // check if email already exists
@@ -845,7 +1172,7 @@ function register() {
   const user = {
     name,email,mobile,platform,market,style,exp,
     strategy:gs('r-strategy')||'Not specified',
-    pass,
+    pass, sq, sa: sa.toLowerCase().trim(),
     joined:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})
   };
   localStorage.setItem('zt_user_'+email, JSON.stringify(user));
@@ -897,6 +1224,7 @@ function renderJournalPage() {
   } else {
     document.getElementById('journal-locked').style.display='none';
     document.getElementById('journal-content').style.display='block';
+    updateTradeCounter();
   }
 }
 
@@ -928,6 +1256,7 @@ function setEmo(btn,e) {
 }
 
 async function saveTrade() {
+  if(!checkTradeLimit()) return;
   const asset=gv('j-asset');
   if(!asset){toast('⚠️','Please enter the asset or pair name!');return;}
   if(!selRes){toast('⚠️','Please select WIN or LOSS!');return;}
@@ -954,14 +1283,19 @@ async function saveTrade() {
     aiAnalysis:'' // will be filled
   };
 
-  // show AI box
+  // show AI box — Pro users only get real analysis
   const aiBox = document.getElementById('ai-analysis-box');
   const aiText = document.getElementById('ai-analysis-text');
-  aiBox.style.display='block';
-  aiText.innerHTML='<div class="loading"><span></span><span></span><span></span></div> Analyzing your trade psychology...';
-
-  // Generate AI analysis
-  const analysis = await generateTradeAnalysis(trade);
+  let analysis = '';
+  if(isPro()) {
+    aiBox.style.display='block';
+    aiText.innerHTML='<div class="loading"><span></span><span></span><span></span></div> Analyzing your trade psychology...';
+    analysis = await generateTradeAnalysis(trade);
+  } else {
+    aiBox.style.display='block';
+    aiText.innerHTML='🔒 <strong style="color:var(--teal)">AI Analysis is a Pro Feature</strong><br/><br/>Upgrade to ZenTrade Pro (₹199/month) to get a deep, personalized AI analysis of every trade you record — technical diagnosis, psychological breakdown, root cause, and specific action plan.<br/><br/><button onclick="go('pricing')" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:9px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;margin-top:8px;">See Pro Plans →</button>';
+    analysis = 'Upgrade to Pro for AI Analysis';
+  }
   trade.aiAnalysis = analysis;
   aiText.innerHTML = analysis;
 
@@ -987,37 +1321,81 @@ async function saveTrade() {
 }
 
 async function generateTradeAnalysis(trade) {
-  const prompt = `You are ZenTrade AI, a trading psychology and technical analysis expert. A trader just recorded this trade:
+  // Build deeply personalized prompt based on ALL trade data
+  const traderStyle = session?.style || 'trader';
+  const traderExp = session?.exp || 'unknown experience';
+  const traderStrategy = session?.strategy || trade.strat;
+  const totalTrades = trades.length;
+  const pastLosses = trades.filter(t=>t.result==='loss').length;
+  const sameRuleBreaks = trade.rule ? trades.filter(t=>t.rule===trade.rule).length : 0;
+  const sameEmotionLosses = trades.filter(t=>t.emotion===trade.emotion&&t.result==='loss').length;
 
-Asset: ${trade.asset}
-Timeframe: ${trade.tf}
-Strategy: ${trade.strat}
-Entry: ${trade.entry||'Not specified'}
-Exit: ${trade.exit||'Not specified'}
-Position Size: ${trade.lot||'Not specified'}
-Result: ${trade.result.toUpperCase()}
-Emotion before trade: ${trade.emotion}
-Rule broken: ${trade.rule||'None'}
-Trader notes: ${trade.notes||'None provided'}
+  // Emotion-specific psychology context
+  const emotionContext = {
+    calm: 'The trader was calm — which is the ideal state. However even calm traders make mistakes when their system has gaps.',
+    anxious: 'The trader was ANXIOUS before this trade. Anxiety in trading almost always comes from position sizing too large, lack of preparation, or fear of losing money that cannot be afforded to lose. Anxious traders exit too early, enter too late, and second-guess every decision.',
+    greedy: 'The trader was GREEDY before this trade. Greed is one of the most dangerous emotions in trading. It causes oversizing, removing take-profit levels, adding to losing positions, and ignoring stop losses. Greed tells the brain "this trade will make back all past losses."',
+    fearful: 'The trader was FEARFUL before this trade. Fear causes hesitation at entry, premature exits before target, and reducing position size so much that wins do not cover losses. Fear is often a sign of trading money that cannot be afforded to lose.',
+    confident: 'The trader was CONFIDENT — but overconfidence is often more dangerous than fear. Confident traders skip checklist steps, increase position size without justification, and ignore warning signs because they "know" the trade will work.',
+    frustrated: 'The trader was FRUSTRATED before this trade. This is a major red flag. Frustration almost always leads to revenge trading — trying to recover losses from previous trades. Frustrated traders enter without proper setup, skip risk management, and make impulsive decisions.',
+    excited: 'The trader was EXCITED before this trade. Excitement is a form of emotional bias. Excited traders see only the potential profit, not the risk. They enter before proper confirmation, size up too large, and ignore counter-signals.',
+    bored: 'The trader was BORED — which is one of the most underrated reasons traders lose money. Boredom forces trades that do not exist. The market does not create setups on demand. Boredom trading destroys accounts slowly and silently.'
+  };
 
-Give a concise but powerful analysis in this exact format using HTML for formatting:
+  const prompt = `You are ZenTrade AI — a brutally honest, deeply experienced trading psychology coach and technical analyst. You have analyzed thousands of trader records and understand exactly why traders fail.
 
-<strong>📊 Technical Analysis:</strong><br/>
-[2-3 sentences about what likely happened technically based on the info provided]<br/><br/>
+TRADER PROFILE:
+- Trading Style: ${traderStyle}
+- Experience Level: ${traderExp}  
+- Primary Strategy: ${traderStrategy}
+- Total trades recorded: ${totalTrades}
+- Past losses recorded: ${pastLosses}
+- Times this same rule was broken before: ${sameRuleBreaks}
+- Times trader lost with this same emotion: ${sameEmotionLosses}
 
-<strong>🧠 Psychological Analysis:</strong><br/>
-[2-3 sentences about the psychological factors — emotion, rule break, mindset]<br/><br/>
+THIS TRADE DATA:
+- Asset: ${trade.asset}
+- Timeframe: ${trade.tf}
+- Strategy used: ${trade.strat}
+- Entry Price: ${trade.entry||'Not recorded'}
+- Exit Price: ${trade.exit||'Not recorded'}
+- Position Size: ${trade.lot||'Not recorded'}
+- Result: ${trade.result.toUpperCase()}
+- Emotion before trade: ${trade.emotion.toUpperCase()}
+- Rule broken: ${trade.rule||'None broken'}
+- Trader's own notes: "${trade.notes||'No notes provided'}"
 
-<strong>✅ What You Did Right:</strong><br/>
-[1-2 things done well even in a loss]<br/><br/>
+EMOTION PSYCHOLOGY CONTEXT:
+${emotionContext[trade.emotion]||'The trader recorded their emotional state.'}
 
-<strong>⚠️ What To Fix Next Time:</strong><br/>
-[2-3 specific, actionable improvements]<br/><br/>
+Now write a DEEP, DETAILED, PERSONALIZED analysis. Do NOT give generic advice. Be specific to THIS trader, THIS trade, THIS emotion, THIS strategy.
+
+Important context about timeframes: ${trade.tf==='1 Min'||trade.tf==='5 Min' ? `This trader is using ${trade.tf} timeframe which indicates scalping or very short-term trading. For scalpers, advice about "using higher timeframes" is often irrelevant — scalpers SHOULD use fast timeframes. Instead focus on entry precision, quick stop placement, and emotional management in fast markets.` : `This trader is using ${trade.tf} which is appropriate for ${trade.tf==='15 Min'||trade.tf==='30 Min'?'intraday':'swing/positional'} trading.`}
+
+Write the analysis in this exact HTML format — be LONG, DETAILED and SPECIFIC (minimum 300 words):
+
+<strong>📊 Technical Analysis of This Trade:</strong><br/>
+[Analyze the specific setup — ${trade.strat} on ${trade.asset} (${trade.tf}). What likely happened technically? What does the entry/exit data tell us? What market conditions typically cause this outcome with this strategy? Be specific — not generic. 3-4 sentences minimum.]<br/><br/>
+
+<strong>🧠 Deep Psychological Analysis:</strong><br/>
+[This is the most important section. Analyze the ${trade.emotion} emotion deeply — what was happening in the trader's mind? How did this emotion affect the specific decisions made in this trade? If a rule was broken, connect the emotion directly to why the rule was broken. Reference that this emotion has caused ${sameEmotionLosses} losses before. Be brutally honest. 4-5 sentences minimum.]<br/><br/>
+
+<strong>🔍 Root Cause Diagnosis:</strong><br/>
+[What is the REAL reason this trade ${trade.result==='loss'?'was lost':'was taken the way it was'}? Go deeper than the surface. Is it a system problem, a psychological problem, a preparation problem, or a discipline problem? 3-4 sentences.]<br/><br/>
+
+<strong>✅ What You Actually Did Right:</strong><br/>
+[Be genuine — find real positives even in a loss. Did they record the trade? Did they recognize their emotion? Did they at least have some criteria met? Be specific. 2-3 sentences.]<br/><br/>
+
+<strong>⚠️ Specific Action Plan — Fix These Before Your Next Trade:</strong><br/>
+[Give 3-4 SPECIFIC, ACTIONABLE steps tailored to THIS trader's style (${traderStyle}), THIS strategy (${trade.strat}), and THIS emotion (${trade.emotion}). Not generic textbook advice. Real specific actions. Number them clearly.]<br/><br/>
+
+<strong>📈 Pattern Warning:</strong><br/>
+[${sameRuleBreaks>0?`This rule "${trade.rule}" has been broken ${sameRuleBreaks} times before. This is now a PATTERN not a mistake. Explain the serious implication of this pattern continuing and what will happen to the trader's account if it continues.`:`First time breaking this rule — or no rule broken. Comment on what to watch for going forward with this specific setup.`}]<br/><br/>
 
 <strong>💡 ZenTrade Verdict:</strong><br/>
-[One powerful closing sentence that the trader will remember]
+[One powerful, memorable closing statement specific to this trader and this trade. Something they will remember the next time they are about to make the same mistake. Make it personal and impactful.]
 
-Keep it honest, direct, and genuinely helpful. Maximum 200 words total.`;
+Be a strict but caring mentor. No sugarcoating. No generic advice. Every sentence must be specific to this trade.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1025,12 +1403,14 @@ Keep it honest, direct, and genuinely helpful. Maximum 200 words total.`;
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
+        max_tokens:2000,
         messages:[{role:'user',content:prompt}]
       })
     });
     const data = await response.json();
-    if(data.content&&data.content[0]) return data.content[0].text;
+    if(data.content&&data.content[0]&&data.content[0].text) {
+      return data.content[0].text;
+    }
     return generateLocalAnalysis(trade);
   } catch(e) {
     return generateLocalAnalysis(trade);
@@ -1038,18 +1418,65 @@ Keep it honest, direct, and genuinely helpful. Maximum 200 words total.`;
 }
 
 function generateLocalAnalysis(trade) {
-  const emoAdvice = EMO_ADVICE[trade.emotion]||'Be mindful of your emotional state before every trade.';
+  // Truly dynamic local analysis — no hardcoded lines
   const isLoss = trade.result==='loss';
-  return `<strong>📊 Technical Analysis:</strong><br/>
-${isLoss?`Your ${trade.strat} setup on ${trade.asset} (${trade.tf}) did not play out as expected. This could be due to market conditions, incorrect entry timing, or a misread of the setup. Always verify the higher timeframe bias before entering.`:`Your ${trade.strat} setup on ${trade.asset} (${trade.tf}) worked as planned. The market moved in your favor — now analyze exactly why so you can repeat it.`}<br/><br/>
-<strong>🧠 Psychological Analysis:</strong><br/>
-${trade.emotion==='calm'?'You were calm before this trade — good. Always aim to trade in this state.':emoAdvice} ${trade.rule?`Breaking the rule "${trade.rule}" directly contributed to ${isLoss?'this loss':'unnecessary risk in this trade'}. This must become non-negotiable.`:''}<br/><br/>
-<strong>✅ What You Did Right:</strong><br/>
-${isLoss?'You recorded this trade in your journal — most traders ignore losses and repeat them. You are already ahead by analyzing it.':'You followed through on your setup and it worked. Identify the exact conditions and replicate them.'}<br/><br/>
-<strong>⚠️ What To Fix Next Time:</strong><br/>
-${trade.rule?`1. Never break the rule "${trade.rule}" again — make it your first checklist item.<br/>2. Before entering, ask: "Would I take this trade if my last 3 trades all lost?" If no — don't enter.`:'1. Always define your entry, stop loss, and target BEFORE entering. 2. Check higher timeframe context. 3. Confirm your setup meets ALL criteria in your plan.'}<br/><br/>
+  const isScalper = trade.tf==='1 Min'||trade.tf==='5 Min';
+  const traderStyle = session?.style||'trader';
+  const sameRuleBreaks = trade.rule ? trades.filter(t=>t.rule===trade.rule).length : 0;
+  const sameEmotionLosses = trades.filter(t=>t.emotion===trade.emotion&&t.result==='loss').length;
+
+  const emotionAnalysis = {
+    greedy: `Your greed before this trade was the signal you needed to either reduce your position size by half or not enter at all. Greed creates a cognitive bias where the brain sees only profit potential and filters out all risk signals. This is why ${trade.asset} looked like a "sure thing" — your greedy mindset was selectively processing information. You have now lost ${sameEmotionLosses} trades while feeling greedy. The pattern is clear.`,
+    anxious: `Anxiety before entering a trade is your subconscious telling you something is wrong — either the setup is not fully valid, your position size is too large for your account, or you are trading money you cannot afford to lose. Anxious traders on ${trade.tf} timeframes are especially vulnerable because fast markets punish hesitation. You have lost ${sameEmotionLosses} trades while anxious. Your anxiety is protecting you — listen to it.`,
+    frustrated: `Trading while frustrated is like driving while angry — you know it is dangerous but you do it anyway. Your frustration before this ${trade.asset} trade almost certainly came from a previous loss or missed opportunity. Frustrated traders seek revenge from the market. But the market has no memory of you — it does not owe you a recovery. Every frustrated trade compounds the damage. You have lost ${sameEmotionLosses} trades in this emotional state.`,
+    excited: `Excitement before a trade on ${trade.asset} means your emotional brain overrode your logical brain. You saw a setup and felt the dopamine rush before properly validating it. ${isScalper?'As a scalper, excitement is especially dangerous because it makes you jump in before your specific entry criteria are fully met on the '+trade.tf+' chart.':'Excited traders enter prematurely, before the setup is fully confirmed.'} You have lost ${sameEmotionLosses} trades while excited.`,
+    fearful: `Fear before this trade suggests you either did not fully trust your ${trade.strat} setup, or you were trading with money that creates psychological pressure. Fearful traders on ${trade.asset} typically exit at the first sign of drawdown — before their stop loss — which means they take small losses even on trades that would have eventually won. Fear destroys edge over time.`,
+    confident: `Confidence can be your greatest asset or your worst enemy. Before this ${trade.asset} trade, your confidence likely caused you to skip one or more validation steps — because you "knew" it would work. ${sameRuleBreaks>1?`You have broken rules ${sameRuleBreaks} times — often when feeling confident. Confidence breeds complacency.`:'Confident traders are most at risk of ignoring warning signs.'}`,
+    bored: `Boredom trading is account destruction in slow motion. There was no genuine ${trade.strat} setup on ${trade.asset} — your boredom created one in your mind. ${isScalper?'Scalpers are especially vulnerable to boredom because the 1-5 minute charts always appear to be "doing something."':'The market does not create setups on demand.'} You have lost ${sameEmotionLosses} trades while bored. Each one cost you real money for zero reason.`,
+    calm: `You were calm — which is the correct state for trading. This means the ${isLoss?'loss':'trade'} was a system issue rather than an emotional one. ${isLoss?'A calm loss means your setup criteria may need refinement, your risk management needs adjustment, or market conditions were genuinely unfavorable.':'Being calm and winning confirms your system works when your psychology is right.'}`
+  };
+
+  const technicalAnalysis = {
+    'SMC': `Your SMC setup on ${trade.asset} (${trade.tf}) ${isLoss?'failed, which typically happens when: the Order Block was already mitigated, you entered before Break of Structure confirmation, or institutional flow had already reversed. SMC requires patience — the entry must be precise. One candle early or late in SMC trading changes a win into a loss.':'worked because you correctly identified institutional footprints. The Order Block held, Structure confirmed direction, and you entered with smart money rather than against it.'}`,
+    'Price Action': `Your Price Action trade on ${trade.asset} (${trade.tf}) ${isLoss?`failed — ${isScalper?'on fast timeframes like '+trade.tf+', price action signals have higher failure rates due to noise and liquidity grabs. The key is waiting for confluence — at least 2-3 PA signals aligning simultaneously, not just one candle pattern.':'Price Action requires context. A hammer at resistance means nothing — a hammer at key support after a trend break with volume confirmation means everything.'}`:'succeeded because the price action signal had proper context — location, structure, and momentum all aligned.'}`,
+    'ICT': `Your ICT setup on ${trade.asset} (${trade.tf}) ${isLoss?'did not play out. ICT concepts are extremely precise — Fair Value Gaps must be fresh, Order Blocks must be unmitigated, and the kill zone timing must be respected. If any of these three elements is off, the trade fails. ICT trading without all confluences is just guessing with a complex vocabulary.':'worked — the ICT framework identified institutional activity correctly. Document exactly which elements confluenced: kill zone, FVG, OB, and liquidity. This is your replicable blueprint.'}`,
+  };
+
+  const techText = technicalAnalysis[trade.strat] || `Your ${trade.strat} setup on ${trade.asset} (${trade.tf}) ${isLoss?`did not play out. ${isScalper?'On '+trade.tf+' timeframes, noise is highest and setups fail more frequently. The key is not to avoid fast timeframes — it is to have razor-sharp entry criteria and never compromise them. One extra candle of confirmation can dramatically improve win rate on scalping strategies.':'The setup failed for one of three reasons: wrong market context, wrong entry timing, or the setup criteria were not fully met before entry.'}`:'worked as planned. Document the exact conditions — structure, momentum, volume, time of day — so you can replicate it.'}`;
+
+  const ruleAnalysis = trade.rule ? `<strong>⚠️ Rule Break: "${trade.rule}"</strong><br/>
+This rule was broken ${sameRuleBreaks} time${sameRuleBreaks!==1?'s':''} in your recorded history. ${sameRuleBreaks>=3?'This is no longer a mistake — it is a HABIT. Habits require deliberate intervention to change, not just willpower. Write this rule on a physical card and place it next to your screen. Read it before every single trade entry.':sameRuleBreaks>=2?'This is becoming a pattern. Two or more times means you know the rule but choose to break it under pressure. The question is not whether you know the rule — it is why you cannot follow it when it matters most.':'First recorded instance of breaking this rule. Pay close attention — the first time is when the habit begins.'}` : '';
+
+  const actionPlan = isLoss ? [
+    trade.emotion==='frustrated'||trade.emotion==='bored' ? `Stop trading for today. Seriously. Close the platform right now. Come back tomorrow with a fresh mindset. No trade taken out of frustration or boredom has ever improved a trading account long-term.` : `Before your next trade on ${trade.asset} or similar assets, write down 3 specific reasons WHY this setup is valid — not feels valid, but IS valid based on your ${trade.strat} rules.`,
+    trade.rule ? `Create a physical pre-trade checklist. The first item must be: "${trade.rule}" — check this FIRST before anything else. Do not proceed to entry if this is not confirmed.` : `Define your exact entry criteria for ${trade.strat} on ${trade.tf} in writing. Every criterion must be met before entering — no exceptions, no "close enough."`,
+    isScalper ? `As a scalper on ${trade.tf}, your edge comes from precision and speed — but precision must come first. Set an alarm rule: if you hesitate on entry for more than 5 seconds, the setup is gone. Either wait for the next setup or skip it entirely.` : `Review this trade on the next higher timeframe. Would the setup have been taken there? Higher timeframe context should always support your lower timeframe entry direction.`,
+    `After your next 5 trades, return to this journal entry and compare. Are you making the same mistake? The point of recording this is to create a mirror — use it.`
+  ] : [
+    `Document the exact market conditions that made this ${trade.strat} setup work on ${trade.asset} (${trade.tf}). Time of day, market structure, volume, preceding price action — all of it.`,
+    `This is your blueprint. Set up a "winning trade template" and compare every future trade against it before entering.`,
+    `Analyze your emotion (${trade.emotion}) — is this the state you were in during most wins? If yes, this is your optimal trading state. Protect it.`
+  ];
+
+  return `<strong>📊 Technical Analysis of This Trade:</strong><br/>
+${techText}<br/><br/>
+
+<strong>🧠 Deep Psychological Analysis:</strong><br/>
+${emotionAnalysis[trade.emotion]||`Your emotional state of ${trade.emotion} before this trade influenced your decision-making in ways you may not have fully noticed. Every emotion creates a cognitive filter that affects what information you prioritize and what you ignore.`}<br/><br/>
+
+<strong>🔍 Root Cause Diagnosis:</strong><br/>
+${isLoss ? `The root cause of this loss is ${trade.rule?`a discipline failure — you knew the rule "${trade.rule}" and broke it anyway. This is not a knowledge problem. You know what you should do. The gap is between knowing and doing — which is a purely psychological problem that repeats until it is directly confronted.`:`a ${trade.emotion==='bored'||trade.emotion==='frustrated'?'psychological problem — you traded while your emotional state was incompatible with good decision-making':'system execution problem — the setup criteria may not have been fully met, or market conditions were genuinely against you this time.'}` } Work backwards: what was the first decision that led to this loss? That is where the real root cause lives.` : `This win came from ${trade.emotion==='calm'?'disciplined execution in the right psychological state — this is exactly what good trading looks like':'a combination of your system working and your emotional state allowing you to follow it. Study what went right as carefully as you study what goes wrong.'}`}<br/><br/>
+
+${ruleAnalysis ? ruleAnalysis+'<br/><br/>' : ''}
+
+<strong>✅ What You Actually Did Right:</strong><br/>
+${isLoss?`You recorded this trade with full honesty — emotion, rule break, and all. Most losing traders delete their history or avoid their journal after losses. You did the opposite. You also identified your emotional state correctly, which means your self-awareness is developing. Self-awareness is the foundation of psychology improvement.`:`You executed the trade, followed through, and recorded it. You also correctly identified your emotional state as ${trade.emotion} — connecting emotional data to trade outcomes over time will reveal your personal trading psychology map.`}<br/><br/>
+
+<strong>⚠️ Specific Action Plan — Do This Before Your Next Trade:</strong><br/>
+${actionPlan.map((a,i)=>`${i+1}. ${a}`).join('<br/>')}<br/><br/>
+
 <strong>💡 ZenTrade Verdict:</strong><br/>
-${isLoss?'A loss recorded and analyzed is a lesson bought. A loss ignored is a mistake repeated.':'A win analyzed deeply is worth more than 10 wins ignored. Lock this memory in.'}`;
+${isLoss ? trade.emotion==='frustrated'||trade.emotion==='bored' ? `You did not lose because of the market — you lost because you sat down to trade when you had no business trading. The most profitable decision you can make today is to close the platform and not open it again until tomorrow.` : trade.rule ? `You already knew this rule. You broke it anyway. The market charged you tuition for a lesson you already paid for before. How many times will you pay for the same lesson?` : `Every loss has a teacher inside it — but only for traders who are honest enough to look. You looked. Now apply what you found.` : `A win is only valuable if you understand why it happened. Document everything about this trade — it is your repeatable blueprint.`}`;
 }
 
 function renderEntries() {
@@ -1109,9 +1536,15 @@ function quickQ(q) {
 }
 
 async function sendMsg() {
+  if(!checkAskLimit()) return;
   const inp = document.getElementById('chat-in');
   const msg = inp.value.trim();
   if(!msg) return;
+  // increment ask count
+  if(!isPro() && session) {
+    session.askCount = (session.askCount||0)+1;
+    saveState();
+  }
   inp.value='';
   inp.style.height='auto';
 
@@ -1285,6 +1718,28 @@ function renderDashboard(){
 
   document.getElementById('d-name').textContent=session.name.split(' ')[0];
   document.getElementById('d-sub').textContent='Here is your complete trading psychology profile, '+session.name.split(' ')[0]+'.';
+  
+  // Plan badge
+  const planBadge = document.getElementById('plan-badge-box');
+  if(planBadge) {
+    planBadge.innerHTML = isPro() ?
+      '<div style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;padding:8px 18px;border-radius:100px;font-size:0.8rem;font-weight:700;">⭐ PRO MEMBER</div>' :
+      '<div style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--dim);padding:8px 18px;border-radius:100px;font-size:0.8rem;font-weight:600;cursor:pointer;" onclick="go('pricing')">🆓 Free Plan — Upgrade to Pro →</div>';
+  }
+
+  // Upgrade prompt for free users
+  const upBox = document.getElementById('dash-upgrade-prompt');
+  if(upBox && !isPro()) {
+    const used = getThisMonthTrades();
+    const remaining = Math.max(0, FREE_TRADE_LIMIT - used);
+    upBox.innerHTML = \`<div class="upgrade-prompt">
+      <h3>⭐ You are on the Free Plan</h3>
+      <p>You have <strong style="color:\${remaining===0?'var(--red)':'var(--teal)'};">\${remaining} trades remaining</strong> this month. Upgrade to Pro for ₹199/month to get unlimited trades, full AI analysis, zero ads, and complete psychological reports.</p>
+      <button onclick="go('pricing')" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:10px 24px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">See Pro Plans — from ₹199/month</button>
+    </div>\`;
+  } else if(upBox) {
+    upBox.innerHTML='';
+  }
   document.getElementById('d-tot').textContent=tot;
   document.getElementById('d-wr').textContent=wr+'%';
   document.getElementById('d-br').textContent=br+'%';
@@ -1335,6 +1790,149 @@ function confirmDelete(){
     document.getElementById('modal').classList.remove('show');
     toast('🗑️','Account deleted. All data will be permanently removed within 3 months.');
   };
+}
+
+// ═══════════════════════════════════════
+// FREEMIUM SYSTEM
+// ═══════════════════════════════════════
+const FREE_TRADE_LIMIT = 5;
+const FREE_ASK_LIMIT = 3;
+
+function isPro() {
+  // During testing phase — everyone is Pro
+  // When payment is ready — check session.plan === 'pro'
+  return session && session.plan === 'pro';
+}
+
+function getThisMonthTrades() {
+  if(!trades.length) return 0;
+  const now = new Date();
+  const thisMonth = now.getMonth();
+  const thisYear = now.getFullYear();
+  return trades.filter(t => {
+    try {
+      const d = new Date(t.id); // id is timestamp
+      return d.getMonth()===thisMonth && d.getFullYear()===thisYear;
+    } catch(e){ return false; }
+  }).length;
+}
+
+function getThisMonthAsks() {
+  return session ? (session.askCount || 0) : 0;
+}
+
+function updateTradeCounter() {
+  const box = document.getElementById('trade-counter-box');
+  const bar = document.getElementById('tc-bar');
+  const count = document.getElementById('tc-count');
+  const label = document.getElementById('tc-label');
+  const adBanner = document.getElementById('ad-banner-journal');
+  if(!box) return;
+
+  if(isPro()) {
+    box.style.display='none';
+    if(adBanner) adBanner.style.display='none';
+    return;
+  }
+
+  const used = getThisMonthTrades();
+  const pct = Math.min((used/FREE_TRADE_LIMIT)*100, 100);
+  box.style.display='flex';
+  count.textContent = used+' / '+FREE_TRADE_LIMIT;
+  label.textContent = 'Free trades this month';
+  bar.style.width = pct+'%';
+  if(pct >= 60) bar.classList.add('warning');
+  else bar.classList.remove('warning');
+
+  // Show ad banner for free users
+  if(adBanner) adBanner.style.display='block';
+}
+
+function checkTradeLimit() {
+  if(isPro()) return true;
+  const used = getThisMonthTrades();
+  if(used >= FREE_TRADE_LIMIT) {
+    showModal('⚠️','Monthly Limit Reached!','You have used all 5 free trades this month. Upgrade to ZenTrade Pro for ₹199/month to get unlimited trades, full AI analysis, and a completely ad-free experience.');
+    document.getElementById('m-btn').textContent='See Pro Plans →';
+    document.getElementById('m-btn').onclick=()=>{document.getElementById('modal').classList.remove('show');go('pricing');};
+    return false;
+  }
+  return true;
+}
+
+function checkAskLimit() {
+  if(isPro()) return true;
+  const used = getThisMonthAsks();
+  if(used >= FREE_ASK_LIMIT) {
+    showModal('⚠️','Monthly Limit Reached!','You have used all 3 free AI questions this month. Upgrade to ZenTrade Pro for ₹199/month to get unlimited AI coaching conversations.');
+    document.getElementById('m-btn').textContent='Upgrade to Pro →';
+    document.getElementById('m-btn').onclick=()=>{document.getElementById('modal').classList.remove('show');go('pricing');};
+    return false;
+  }
+  return true;
+}
+
+function showUpgradeModal(region) {
+  const isIndia = region==='india';
+  showModal('⭐','Upgrade to ZenTrade Pro!', isIndia ?
+    'ZenTrade Pro India — Special Launch Price ₹199/month (Regular price ₹699/month — 71% OFF). Unlimited trades, full AI analysis, no ads, complete mistake memory, weekly mind reports and all premium learning resources. Payment system coming very soon — we will notify you by email when it is ready!' :
+    'ZenTrade Pro Global — Special Launch Price $9.99/month (Regular price $29.9/month — 66% OFF). Unlimited trades, full AI analysis, no ads, complete mistake memory, weekly mind reports and all premium learning resources. Payment system coming very soon — we will notify you by email when it is ready!'
+  );
+  document.getElementById('m-btn').textContent='Notify Me When Ready →';
+  document.getElementById('m-btn').onclick=()=>{
+    document.getElementById('modal').classList.remove('show');
+    toast('✅','<strong>We will notify you!</strong> You will get an email when Pro payments go live.');
+  };
+}
+
+function toggleFaq(el) {
+  const ans = el.querySelector('.faq-a');
+  const sym = el.querySelector('.faq-q span');
+  ans.classList.toggle('open');
+  sym.textContent = ans.classList.contains('open') ? '−' : '+';
+}
+
+// ═══════════════════════════════════════
+// FORGOT PASSWORD
+// ═══════════════════════════════════════
+let forgotStage = 1;
+let forgotUser = null;
+
+function forgotStep() {
+  if(forgotStage===1) {
+    const email = gv('f-email');
+    if(!email) { toast('⚠️','Please enter your email!'); return; }
+    const stored = localStorage.getItem('zt_user_'+email);
+    if(!stored) { toast('❌','No account found with this email.'); return; }
+    forgotUser = JSON.parse(stored);
+    document.getElementById('f-q-label').textContent = forgotUser.sq;
+    document.getElementById('f-q-box').style.display = 'block';
+    document.getElementById('f-btn').textContent = 'Verify Answer';
+    forgotStage = 2;
+    toast('✅','Account found! Answer your security question.');
+  } else if(forgotStage===2) {
+    const answer = gv('f-answer').toLowerCase().trim();
+    if(!answer) { toast('⚠️','Please enter your security answer!'); return; }
+    if(answer !== forgotUser.sa) { toast('❌','Wrong answer! Try again.'); return; }
+    document.getElementById('f-newpass-box').style.display = 'block';
+    document.getElementById('f-btn').textContent = 'Reset My Password';
+    forgotStage = 3;
+    toast('✅','Correct! Now set your new password.');
+  } else if(forgotStage===3) {
+    const newpass = gv('f-newpass');
+    if(!newpass||newpass.length<4) { toast('⚠️','Password must be at least 4 characters!'); return; }
+    forgotUser.pass = newpass;
+    localStorage.setItem('zt_user_'+forgotUser.email, JSON.stringify(forgotUser));
+    toast('✅','<strong>Password reset successfully!</strong> You can now login.');
+    forgotStage = 1; forgotUser = null;
+    document.getElementById('f-email').value='';
+    document.getElementById('f-answer').value='';
+    document.getElementById('f-newpass').value='';
+    document.getElementById('f-q-box').style.display='none';
+    document.getElementById('f-newpass-box').style.display='none';
+    document.getElementById('f-btn').textContent='Find My Account';
+    setTimeout(()=>go('login'),2000);
+  }
 }
 
 // ═══════════════════════════════════════
