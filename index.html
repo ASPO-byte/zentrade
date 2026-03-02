@@ -1293,7 +1293,7 @@ async function saveTrade() {
     analysis = await generateTradeAnalysis(trade);
   } else {
     aiBox.style.display='block';
-    aiText.innerHTML='🔒 <strong style="color:var(--teal)">AI Analysis is a Pro Feature</strong><br/><br/>Upgrade to ZenTrade Pro (₹199/month) to get a deep, personalized AI analysis of every trade you record — technical diagnosis, psychological breakdown, root cause, and specific action plan.<br/><br/><button onclick="go('pricing')" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:9px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;margin-top:8px;">See Pro Plans →</button>';
+    aiText.innerHTML='🔒 <strong style="color:var(--teal)">AI Analysis is a Pro Feature</strong><br/><br/>Upgrade to ZenTrade Pro (&#8377;199/month) to get a deep, personalized AI analysis of every trade you record.<br/><br/><button onclick="go(&quot;pricing&quot;)" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;margin-top:8px;">See Pro Plans &#8594;</button>';
     analysis = 'Upgrade to Pro for AI Analysis';
   }
   trade.aiAnalysis = analysis;
@@ -1724,7 +1724,7 @@ function renderDashboard(){
   if(planBadge) {
     planBadge.innerHTML = isPro() ?
       '<div style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;padding:8px 18px;border-radius:100px;font-size:0.8rem;font-weight:700;">⭐ PRO MEMBER</div>' :
-      '<div style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--dim);padding:8px 18px;border-radius:100px;font-size:0.8rem;font-weight:600;cursor:pointer;" onclick="go('pricing')">🆓 Free Plan — Upgrade to Pro →</div>';
+      '<div style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--dim);padding:8px 18px;border-radius:100px;font-size:0.8rem;font-weight:600;cursor:pointer;" onclick="go(\'pricing\')">🆓 Free Plan — Upgrade to Pro →</div>';
   }
 
   // Upgrade prompt for free users
@@ -1732,11 +1732,12 @@ function renderDashboard(){
   if(upBox && !isPro()) {
     const used = getThisMonthTrades();
     const remaining = Math.max(0, FREE_TRADE_LIMIT - used);
-    upBox.innerHTML = \`<div class="upgrade-prompt">
-      <h3>⭐ You are on the Free Plan</h3>
-      <p>You have <strong style="color:\${remaining===0?'var(--red)':'var(--teal)'};">\${remaining} trades remaining</strong> this month. Upgrade to Pro for ₹199/month to get unlimited trades, full AI analysis, zero ads, and complete psychological reports.</p>
-      <button onclick="go('pricing')" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:10px 24px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">See Pro Plans — from ₹199/month</button>
-    </div>\`;
+    var clr = remaining===0 ? 'var(--red)' : 'var(--teal)';
+    upBox.innerHTML = '<div class="upgrade-prompt">' +
+      '<h3>⭐ You are on the Free Plan</h3>' +
+      '<p>You have <strong style="color:' + clr + ';">' + remaining + ' trades remaining</strong> this month. Upgrade to Pro for ₹199/month to get unlimited trades, full AI analysis, zero ads, and complete psychological reports.</p>' +
+      '<button onclick="go(\'pricing\')" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;border:none;padding:10px 24px;border-radius:9px;font-family:DM Sans,sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">See Pro Plans — from ₹199/month</button>' +
+    '</div>';
   } else if(upBox) {
     upBox.innerHTML='';
   }
